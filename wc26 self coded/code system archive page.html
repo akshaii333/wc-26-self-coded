@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TACTICAL_INTEL_V1 // SYSTEM ARCHIVE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-dim": "#58e7ab",
+                        "surface-tint": "#69f6b8",
+                        "primary-fixed-dim": "#58e7ab",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary": "#005360",
+                        "inverse-on-surface": "#565554",
+                        "surface-container": "#1a1919",
+                        "primary-container": "#06b77f",
+                        "tertiary-container": "#00dcfd",
+                        "tertiary-fixed": "#00dcfd",
+                        "on-secondary-fixed": "#004939",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary-container": "#006b56",
+                        "secondary-fixed-dim": "#47edc4",
+                        "inverse-primary": "#006d4a",
+                        "on-background": "#ffffff",
+                        "error-dim": "#d7383b",
+                        "on-primary-container": "#002919",
+                        "outline": "#777575",
+                        "surface-bright": "#2c2c2c",
+                        "on-secondary-fixed-variant": "#006853",
+                        "surface-container-highest": "#262626",
+                        "on-surface": "#ffffff",
+                        "surface-dim": "#0e0e0e",
+                        "surface-container-high": "#201f1f",
+                        "secondary-fixed": "#5afcd2",
+                        "on-tertiary-container": "#004955",
+                        "on-primary": "#005a3c",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-fixed-variant": "#006544",
+                        "inverse-surface": "#fcf8f8",
+                        "error-container": "#9f0519",
+                        "outline-variant": "#494847",
+                        "on-surface-variant": "#adaaaa",
+                        "tertiary": "#77e6ff",
+                        "background": "#0e0e0e",
+                        "on-error-container": "#ffa8a3",
+                        "on-primary-fixed": "#00452d",
+                        "surface-variant": "#262626",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-tertiary-fixed": "#00343c",
+                        "error": "#ff716c",
+                        "on-secondary-container": "#defff2",
+                        "primary": "#69f6b8",
+                        "surface": "#0e0e0e",
+                        "surface-container-low": "#131313",
+                        "on-secondary": "#005d4a",
+                        "secondary-dim": "#47edc4",
+                        "tertiary-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-error": "#490006"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e;
+            background-image:
+                linear-gradient(rgba(14, 14, 14, 0.86), rgba(14, 14, 14, 0.9)),
+                linear-gradient(rgba(73, 72, 71, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(73, 72, 71, 0.12) 1px, transparent 1px),
+                url("https://lh3.googleusercontent.com/aida-public/AB6AXuArkxEfQvbzRlq7Oqcz1xVG1vayBGye0dD5Qzm0MafU5BRKsjoeEX5w2KSg35zEpjAtaoLhsoWHtwPDed8OIahZg_uMKbx5NY-BKx6WokmNmhjMekv6nuUGkdbxLYftaE8TvYPBO_dtEfYcihW7QDprJu2xQcoPW-Ds3Y_Jf1-M4lCpJHQWnvH2CmXsSQAU56zSl3PNOKdUiHy4D7R9jBXg4f08jfOTsLbKwWEavsr2U4o0AMEKYhtRnw_tp7ADTKEafvYVRuGOqVPs");
+            background-size: auto, 24px 24px, 24px 24px, cover;
+            background-position: center, 0 0, 0 0, center;
+            background-repeat: no-repeat, repeat, repeat, no-repeat;
+            background-attachment: fixed, fixed, fixed, fixed;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface">
+<!-- TopNavBar Shell -->
+<header class="bg-[#0e0e0e] border-b border-[#494847]/30 flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50">
+<div class="text-xl font-black text-[#69f6b8] tracking-widest">TACTICAL_INTEL_V1</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="#">MATCH CENTER</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="#">TACTICAL LEDGER</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="#">PERFORMANCE INDEX</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="#">SYSTEM ARCHIVE</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
+<input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
+</div>
+<div class="flex gap-3">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">analytics</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">terminal</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">settings</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto px-6 py-8">
+<!-- Dashboard Header Metadata -->
+<div class="flex flex-col md:flex-row justify-between items-end mb-8 border-l-4 border-primary pl-4">
+<div>
+<h1 class="font-headline text-4xl font-black uppercase tracking-tighter mb-1">System Archive</h1>
+<p class="text-on-surface-variant font-mono text-[10px] tracking-widest"></p>
+</div>
+<div class="hidden md:flex gap-4 font-mono text-[10px]">
+<div class="text-right">
+<div class="text-on-surface-variant">TOTAL_TICKETS</div>
+<div class="text-primary font-bold">1,248.00</div>
+</div>
+<div class="text-right">
+<div class="text-on-surface-variant">VOL_AVG</div>
+<div class="text-secondary font-bold">42.8%</div>
+</div>
+</div>
+</div>
+<!-- Terminal Filters -->
+<div class="flex flex-wrap items-center gap-2 mb-6 border-b border-outline-variant/30 pb-4">
+<span class="text-[10px] font-mono text-on-surface-variant mr-4 uppercase">Filter_by_Stage:</span>
+<button class="px-4 py-1 text-[10px] font-bold font-mono border border-primary bg-primary/10 text-primary">ALL_MATCHES</button>
+<button class="px-4 py-1 text-[10px] font-bold font-mono border border-outline-variant text-on-surface-variant hover:bg-surface-container-high">GROUP</button>
+<button class="px-4 py-1 text-[10px] font-bold font-mono border border-outline-variant text-on-surface-variant hover:bg-surface-container-high">KNOCKOUT</button>
+<button class="px-4 py-1 text-[10px] font-bold font-mono border border-outline-variant text-on-surface-variant hover:bg-surface-container-high">FINAL</button>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-[10px] font-mono text-on-surface-variant uppercase">Sort:</span>
+<select class="bg-transparent border-none text-[10px] font-mono text-primary focus:ring-0 cursor-pointer">
+<option>CHRONOLOGICAL_DESC</option>
+<option>INTENSITY_ASC</option>
+</select>
+</div>
+</div>
+<!-- Data Grid: Matches Archive -->
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container text-left border-y border-outline-variant/50">
+<th class="p-4 font-mono text-[13px] tracking-widest text-on-surface-variant uppercase">
+  <div>Timestamp</div>
+  <div class="font-mono text-[11px] tracking-normal text-on-surface-variant uppercase">(mm.dd.yyyy hh:mm)</div>
+</th>
+
+<th class="p-4 font-mono text-[13px] tracking-widest text-on-surface-variant uppercase">Stage</th>
+<th class="p-4 font-mono text-[13px] tracking-widest text-on-surface-variant uppercase">Assets (Competitors)</th>
+<th class="p-4 font-mono text-[13px] tracking-widest text-on-surface-variant uppercase text-center">Last Price (Score)</th>
+<th class="p-4 font-mono text-[13px] tracking-widest text-on-surface-variant uppercase">Volatility (Intensity)</th>
+<th class="p-4 font-mono text-[13px] tracking-widest text-on-surface-variant uppercase text-right">Execution</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Trade Ticket 01 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-4 font-mono text-[11px] text-on-surface-variant">6.11.2026 12:00</td>
+<td class="p-4">
+<span class="px-2 py-0.5 text-[9px] font-bold font-mono bg-surface-container-high border border-outline-variant text-on-surface-variant uppercase">GROUP A</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-sm tracking-tight">MEXICO</span>
+<span class="text-[10px] text-primary">vs</span>
+<span class="font-headline font-bold text-sm tracking-tight">SOUTH AFRICA</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="font-mono font-bold text-primary text-lg">? : ?</div>
+</td>
+<td class="p-4">
+<div class="w-full max-w-[120px] h-1.5 bg-surface-container-highest border border-outline-variant/30 flex">
+<div class="bg-primary h-full shadow-[0_0_8px_#69f6b8]" style="width: 88%;"></div>
+</div>
+<div class="text-[9px] font-mono text-primary mt-1 uppercase tracking-tighter">Extreme_Pressure // 88%</div>
+</td>
+<td class="p-4 text-right">
+<button class="text-[10px] font-bold font-mono text-primary group-hover:underline underline-offset-4 uppercase">View_Details_&gt;</button>
+</td>
+</tr>
+<!-- Trade Ticket 02 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-4 font-mono text-[11px] text-on-surface-variant">6.12.2026 12:00</td>
+<td class="p-4">
+<span class="px-2 py-0.5 text-[9px] font-bold font-mono bg-surface-container-high border border-outline-variant text-on-surface-variant uppercase">GROUP B</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-sm tracking-tight">CANADA</span>
+<span class="text-[10px] text-primary">vs</span>
+<span class="font-headline font-bold text-sm tracking-tight">BOSNIA AND HERZEGOVINA</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="font-mono font-bold text-primary text-lg">? : ?</div>
+</td>
+<td class="p-4">
+<div class="w-full max-w-[120px] h-1.5 bg-surface-container-highest border border-outline-variant/30 flex">
+<div class="bg-secondary h-full shadow-[0_0_8px_#5afcd2]" style="width: 62%;"></div>
+</div>
+<div class="text-[9px] font-mono text-secondary mt-1 uppercase tracking-tighter">High_Volatility // 62%</div>
+</td>
+<td class="p-4 text-right">
+<button class="text-[10px] font-bold font-mono text-primary group-hover:underline underline-offset-4 uppercase">View_Details_&gt;</button>
+</td>
+</tr>
+<!-- Trade Ticket 03 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-4 font-mono text-[11px] text-on-surface-variant">2026.11.13_20:45</td>
+<td class="p-4">
+<span class="px-2 py-0.5 text-[9px] font-bold font-mono bg-surface-container-high border border-outline-variant text-on-surface-variant uppercase">GROUP C</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-sm tracking-tight">BRAZIL</span>
+<span class="text-[10px] text-primary">vs</span>
+<span class="font-headline font-bold text-sm tracking-tight">MOROCCO</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="font-mono font-bold text-primary text-lg">? : ?</div>
+</td>
+<td class="p-4">
+<div class="w-full max-w-[120px] h-1.5 bg-surface-container-highest border border-outline-variant/30 flex">
+<div class="bg-tertiary h-full shadow-[0_0_8px_#77e6ff]" style="width: 31%;"></div>
+</div>
+<div class="text-[9px] font-mono text-tertiary mt-1 uppercase tracking-tighter">Low_Density // 31%</div>
+</td>
+<td class="p-4 text-right">
+<button class="text-[10px] font-bold font-mono text-primary group-hover:underline underline-offset-4 uppercase">View_Details_&gt;</button>
+</td>
+</tr>
+<!-- Trade Ticket 04 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-4 font-mono text-[11px] text-on-surface-variant">2026.11.13_16:00</td>
+<td class="p-4">
+<span class="px-2 py-0.5 text-[9px] font-bold font-mono bg-surface-container-high border border-outline-variant text-on-surface-variant uppercase">KNOCKOUT</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-sm tracking-tight">TBD</span>
+<span class="text-[10px] text-primary">vs</span>
+<span class="font-headline font-bold text-sm tracking-tight">TBD</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="font-mono font-bold text-primary text-lg">? : ?</div>
+</td>
+<td class="p-4">
+<div class="w-full max-w-[120px] h-1.5 bg-surface-container-highest border border-outline-variant/30 flex">
+<div class="bg-error h-full shadow-[0_0_8px_#ff716c]" style="width: 12%;"></div>
+</div>
+<div class="text-[9px] font-mono text-error mt-1 uppercase tracking-tighter">Stagnant // 12%</div>
+</td>
+<td class="p-4 text-right">
+<button class="text-[10px] font-bold font-mono text-primary group-hover:underline underline-offset-4 uppercase">View_Details_&gt;</button>
+</td>
+</tr>
+<!-- Trade Ticket 05 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-4 font-mono text-[11px] text-on-surface-variant">2026.11.12_21:00</td>
+<td class="p-4">
+<span class="px-2 py-0.5 text-[9px] font-bold font-mono bg-surface-container-high border border-outline-variant text-on-surface-variant uppercase">FINAL</span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<span class="font-headline font-bold text-sm tracking-tight">TBD</span>
+<span class="text-[10px] text-primary">vs</span>
+<span class="font-headline font-bold text-sm tracking-tight">TBD</span>
+</div>
+</td>
+<td class="p-4 text-center">
+<div class="font-mono font-bold text-primary text-lg">? : ?</div>
+</td>
+<td class="p-4">
+<div class="w-full max-w-[120px] h-1.5 bg-surface-container-highest border border-outline-variant/30 flex">
+<div class="bg-primary h-full shadow-[0_0_8px_#69f6b8]" style="width: 75%;"></div>
+</div>
+<div class="text-[9px] font-mono text-primary mt-1 uppercase tracking-tighter">Aggressive // 75%</div>
+</td>
+<td class="p-4 text-right">
+<button class="text-[10px] font-bold font-mono text-primary group-hover:underline underline-offset-4 uppercase">View_Details_&gt;</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Terminal System Pagination -->
+<div class="mt-8 flex justify-between items-center bg-surface-container-high p-4 border border-outline-variant/30">
+<div class="text-[10px] font-mono text-on-surface-variant">DISPLAYING: 001 - 005 OF 104 TICKETS</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface border border-outline-variant text-on-surface-variant material-symbols-outlined text-sm hover:text-primary">chevron_left</button>
+<div class="flex gap-1">
+<button class="px-3 py-1 bg-primary text-on-primary text-[10px] font-bold font-mono">01</button>
+<button class="px-3 py-1 bg-surface border border-outline-variant text-on-surface-variant text-[10px] font-bold font-mono hover:text-primary">02</button>
+<button class="px-3 py-1 bg-surface border border-outline-variant text-on-surface-variant text-[10px] font-bold font-mono hover:text-primary">03</button>
+<span class="px-2 py-1 text-on-surface-variant font-mono">...</span>
+<button class="px-3 py-1 bg-surface border border-outline-variant text-on-surface-variant text-[10px] font-bold font-mono hover:text-primary">05</button>
+</div>
+<button class="px-3 py-1 bg-surface border border-outline-variant text-on-surface-variant material-symbols-outlined text-sm hover:text-primary">chevron_right</button>
+</div>
+</div>
+<!-- System Visual Decor: Data Stream -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="border border-outline-variant/20 p-4 bg-surface-container-lowest">
+<div class="text-[9px] font-mono text-primary uppercase mb-2">Archive_Network_Health</div>
+<div class="flex items-end gap-1 h-12">
+<div class="bg-primary w-full h-[60%]"></div>
+<div class="bg-primary w-full h-[40%]"></div>
+<div class="bg-primary w-full h-[80%]"></div>
+<div class="bg-primary w-full h-[30%]"></div>
+<div class="bg-primary w-full h-[90%]"></div>
+<div class="bg-primary w-full h-[50%]"></div>
+</div>
+</div>
+<div class="border border-outline-variant/20 p-4 bg-surface-container-lowest">
+<div class="text-[9px] font-mono text-secondary uppercase mb-2">Execution_Efficiency</div>
+<div class="text-2xl font-headline font-black text-secondary tracking-tighter">99.98%</div>
+<div class="text-[8px] font-mono text-on-surface-variant">LTC: 0.2ms // ERR: 0.00%</div>
+</div>
+<div class="border border-outline-variant/20 p-4 bg-surface-container-lowest">
+<div class="text-[9px] font-mono text-error uppercase mb-2">Security_Protocol</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-lg" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-headline font-bold text-sm tracking-tight text-on-surface">KERNEL_LOCKED</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-[#0e0e0e] border-t border-[#494847]/30 flex justify-between items-center w-full px-6 py-2 bg-grid-pattern opacity-90 fixed bottom-0">
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa]">
+            SYSTEM_STATUS: <span class="text-[#69f6b8]">OPERATIONAL</span> // KERNEL_VER: 4.9.2 // 
+        </div>
+<div class="flex gap-6">
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] hover:text-[#ffffff] transition-colors cursor-pointer">LATENCY: 14MS</span>
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] hover:text-[#ffffff] transition-colors cursor-pointer">UPTIME: 99.9%</span>
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#69f6b8] hover:text-[#ffffff] transition-colors cursor-pointer">ENCRYPTED_FEED</span>
+</div>
+</footer>
+</body></html>
