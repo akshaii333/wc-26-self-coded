@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TACTICAL_INTEL_V1 // MISSION_MANIFESTO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-dim": "#58e7ab",
+                    "surface-tint": "#69f6b8",
+                    "primary-fixed-dim": "#58e7ab",
+                    "surface-container-lowest": "#000000",
+                    "on-tertiary": "#005360",
+                    "inverse-on-surface": "#565554",
+                    "surface-container": "#1a1919",
+                    "primary-container": "#06b77f",
+                    "tertiary-container": "#00dcfd",
+                    "tertiary-fixed": "#00dcfd",
+                    "on-secondary-fixed": "#004939",
+                    "tertiary-fixed-dim": "#00cdeb",
+                    "secondary-container": "#006b56",
+                    "secondary-fixed-dim": "#47edc4",
+                    "inverse-primary": "#006d4a",
+                    "on-background": "#ffffff",
+                    "error-dim": "#d7383b",
+                    "on-primary-container": "#002919",
+                    "outline": "#777575",
+                    "surface-bright": "#2c2c2c",
+                    "on-secondary-fixed-variant": "#006853",
+                    "surface-container-highest": "#262626",
+                    "on-surface": "#ffffff",
+                    "surface-dim": "#0e0e0e",
+                    "surface-container-high": "#201f1f",
+                    "secondary-fixed": "#5afcd2",
+                    "on-tertiary-container": "#004955",
+                    "on-primary": "#005a3c",
+                    "primary-fixed": "#69f6b8",
+                    "on-primary-fixed-variant": "#006544",
+                    "inverse-surface": "#fcf8f8",
+                    "error-container": "#9f0519",
+                    "outline-variant": "#494847",
+                    "on-surface-variant": "#adaaaa",
+                    "tertiary": "#77e6ff",
+                    "background": "#0e0e0e",
+                    "on-error-container": "#ffa8a3",
+                    "on-primary-fixed": "#00452d",
+                    "surface-variant": "#262626",
+                    "on-tertiary-fixed-variant": "#005360",
+                    "on-tertiary-fixed": "#00343c",
+                    "error": "#ff716c",
+                    "on-secondary-container": "#defff2",
+                    "primary": "#69f6b8",
+                    "surface": "#0e0e0e",
+                    "surface-container-low": "#131313",
+                    "on-secondary": "#005d4a",
+                    "secondary-dim": "#47edc4",
+                    "tertiary-dim": "#00cdeb",
+                    "secondary": "#5afcd2",
+                    "on-error": "#490006"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .grid-texture {
+            background-image: radial-gradient(circle, #494847 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; }
+        ::-webkit-scrollbar-thumb { background: #494847; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TOP NAVIGATION SHELL -->
+ <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
+<header class="fixed top-0 left-0 w-full z-50 bg-[#0e0e0e] border-b border-[#494847]/30 flex justify-between items-center px-6 py-4">
+<div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">TACTICAL_INTEL_V1</div>
+<nav class="hidden md:flex items-center gap-8 font-space-grotesk tracking-tighter uppercase text-sm font-bold">
+<a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20match%20center.html">MATCH CENTER</a>
+<a  class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
+<a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
+<a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">SYSTEM ARCHIVE</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">analytics</span>
+<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">terminal</span>
+<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">settings</span>
+</div>
+</header>
+<main class="relative pt-24 pb-16 min-h-screen overflow-hidden">
+<div class="absolute inset-0 grid-texture pointer-events-none"></div>
+<!-- HERO SECTION: THE MANIFESTO HEADER -->
+<section class="max-w-7xl mx-auto px-6 mb-24 grid grid-cols-1 md:grid-cols-12 gap-8 relative z-10">
+<div class="md:col-span-8">
+<div class="inline-flex items-center gap-2 mb-6 border border-outline-variant px-3 py-1 bg-surface-container-low">
+<span class="w-2 h-2 bg-primary"></span>
+<span class="font-label text-[10px] tracking-widest uppercase text-on-surface-variant"></span>
+</div>
+<h1 class="font-headline text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
+                    TACTICAL <br/><span class="text-primary">HUMANISM</span>
+</h1>
+<p class="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed max-w-2xl border-l-2 border-primary pl-6">
+                    A philosophy of radical technical agency. We reject the "frictionless" sedative of modern design in favor of high-performance instrumentation.
+                </p>
+</div>
+<div class="md:col-span-4 flex flex-col justify-end">
+<div class="border border-outline-variant p-6 bg-surface-container">
+<div class="font-headline text-sm font-bold text-primary mb-4 tracking-widest uppercase">SYNOPSIS</div>
+<div class="space-y-4 font-body text-sm leading-relaxed text-on-surface-variant">
+<p><span class="text-on-surface font-bold">[01]</span> RECLAIMING THE TOOL: UI as an extension of professional intent, not a distraction.</p>
+<p><span class="text-on-surface font-bold">[02]</span> DATA DENSITY: Intelligence is proportional to the transparency of information.</p>
+<p><span class="text-on-surface font-bold">[03]</span> SURGICAL PRECISION: Every pixel serves a functional command.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- THE KERNEL: TECHNICAL DIAGRAM -->
+<section class="max-w-7xl mx-auto px-6 mb-32 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="order-2 lg:order-1">
+<div class="aspect-square relative border border-outline-variant bg-surface-container-lowest p-8 flex items-center justify-center">
+<!-- Abstract Technical Diagram Representation -->
+<div class="w-full h-full border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-64 h-64 border-2 border-primary/20 rotate-45 flex items-center justify-center">
+<div class="w-48 h-48 border-2 border-primary/40 -rotate-12 flex items-center justify-center">
+<div class="w-32 h-32 bg-primary/10 border border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">token</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-4 left-4 font-label text-[10px] text-primary tracking-widest uppercase">KERNEL_CORE.SVG</div>
+<div class="absolute bottom-4 right-4 font-label text-[10px] text-on-surface-variant text-right uppercase">
+                                INPUT: RAW_DATA <br/> OUTPUT: ACTIONABLE_INTEL
+                            </div>
+<div class="absolute inset-0 opacity-10 bg-[linear-gradient(90deg,transparent_24px,#494847_25px),linear-gradient(0deg,transparent_24px,#494847_25px)] bg-[size:25px_25px]"></div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-headline text-4xl font-bold uppercase tracking-tight mb-8">THE <span class="text-primary">KERNEL</span> ARCHITECTURE</h2>
+<div class="space-y-12">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 border border-primary text-primary flex items-center justify-center font-headline font-bold">A1</div>
+<div>
+<h3 class="font-headline text-xl font-bold uppercase mb-2">NEURAL_ROUTING</h3>
+<p class="text-on-surface-variant font-body">Description</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 border border-outline-variant text-on-surface flex items-center justify-center font-headline font-bold">B2</div>
+<div>
+<h3 class="font-headline text-xl font-bold uppercase mb-2">DYNAMIC_PRIORITY</h3>
+<p class="text-on-surface-variant font-body">Description</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 border border-outline-variant text-on-surface flex items-center justify-center font-headline font-bold">C3</div>
+<div>
+<h3 class="font-headline text-xl font-bold uppercase mb-2">TACTICAL_FEEDBACK</h3>
+<p class="text-on-surface-variant font-body">Description</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DESIGN DECISIONS: ASYMMETRIC GRID -->
+<section class="bg-surface-container-low border-y border-outline-variant/30 py-24 relative z-10">
+<div class="max-w-7xl mx-auto px-6">
+<div class="mb-16">
+<h2 class="font-headline text-sm font-black text-primary tracking-[0.3em] uppercase mb-4">DESIGN_DECISIONS // LOG_FILE</h2>
+<h3 class="font-headline text-5xl font-bold uppercase tracking-tighter">THE ENFORCED <span class="text-primary">MANDATES</span></h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+<div class="bg-surface p-10 border border-outline-variant/20 hover:border-primary transition-colors group">
+<div class="text-primary mb-8">
+<span class="material-symbols-outlined text-5xl">square</span>
+</div>
+<h4 class="font-headline text-2xl font-bold uppercase mb-4 group-hover:text-primary transition-colors">PLAYER RING STATS</h4>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">
+                            Curvature is a sign of hesitation. To ensure surgical focus, all components are built on a strict 0px radius. Hard edges represent high-performance engineering.
+                        </p>
+</div>
+<div class="bg-surface p-10 border border-outline-variant/20 hover:border-primary transition-colors group">
+<div class="text-primary mb-8">
+<span class="material-symbols-outlined text-5xl">layers</span>
+</div>
+<h4 class="font-headline text-2xl font-bold uppercase mb-4 group-hover:text-primary transition-colors">DATA-FIRST HIERARCHY</h4>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">
+                            We prioritize numeric density over white space. If a pixel isn't carrying information or defining a structure, it is considered system noise and removed.
+                        </p>
+</div>
+<div class="bg-surface p-10 border border-outline-variant/20 hover:border-primary transition-colors group">
+<div class="text-primary mb-8">
+<span class="material-symbols-outlined text-5xl">contrast</span>
+</div>
+<h4 class="font-headline text-2xl font-bold uppercase mb-4 group-hover:text-primary transition-colors">CHRONIC_CONTRAST</h4>
+<p class="text-on-surface-variant font-body leading-relaxed text-sm">
+                            Accessibility through aggression. We utilize pure obsidian and emerald neons to ensure legibility in low-light, high-stress operational environments.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- EDITORIAL IMAGERY -->
+<section class="max-w-7xl mx-auto px-6 my-32 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-4 h-[500px] overflow-hidden border border-outline-variant">
+<img alt="System interface details" class="w-full h-full object-cover grayscale brightness-50 hover:grayscale-0 hover:brightness-100 transition-all duration-700" data-alt="high-tech computer server room with glowing green LED lights and dark hardware cables in a futuristic data center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOeXkSX9tEzujl-NPaPyfP3uGbjzI5Vm83-Pf3iTDeAOk2QZQwQvLrEx7kLBr9NoNU4Ou6eqsikSlb6YHLnxJUbB8SAZkYaEnB9Xg3cTPpY88O4UwYKgYm9qsZs8h_ErBW506FORXb8FLUPqgiFvwbqahxOJ1jTWgmuUyFTrF7tzbtD2YgeEOxH9WFPlb_7jezsiRqcSeGZkXKHx5N9j_bwkEdoi_plUB3SUoO04-RcRWhuBKumb6DxpAapRfIUsFbUWmgbdSuHTzo"/>
+</div>
+<div class="md:col-span-8 flex flex-col gap-4">
+<div class="h-[242px] border border-outline-variant bg-surface-container p-12 flex items-center">
+<blockquote class="font-headline text-3xl font-black italic uppercase leading-none text-on-surface">
+                            "TECHNOLOGY IS NOT A COMMODITY. <br/>IT IS AN <span class="text-primary">AUGMENTATION</span> OF THE HUMAN WILL."
+                        </blockquote>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-4">
+<div class="bg-primary text-on-primary p-8 flex flex-col justify-between">
+<div class="font-headline text-6xl font-black">99.9%</div>
+<div class="font-label text-xs uppercase tracking-widest font-bold">SYSTEM_OPERATIONAL_EFFICIENCY</div>
+</div>
+<div class="border border-outline-variant p-8 flex flex-col justify-between">
+<div class="font-headline text-4xl font-black text-on-surface uppercase">EST. 2026</div>
+<div class="font-label text-xs uppercase tracking-widest text-on-surface-variant">ARCHIVE_GENESIS_MARK</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA / FOOTER MANIFESTO -->
+<section class="max-w-3xl mx-auto px-6 text-center mb-32 relative z-10">
+<div class="inline-block border-2 border-primary p-2 mb-8">
+<div class="border border-primary px-8 py-4">
+<span class="font-headline text-sm font-bold uppercase tracking-[0.4em] text-primary">INITIALIZE_CONNECTION</span>
+</div>
+</div>
+<h2 class="font-headline text-4xl font-bold uppercase mb-6 tracking-tight">READY FOR THE NEXT PHASE?</h2>
+<p class="font-body text-on-surface-variant mb-12"></p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<button class="bg-primary text-on-primary font-headline font-bold uppercase py-4 px-12 text-sm tracking-widest hover:bg-primary-container transition-colors">
+                    REQUEST_CREDENTIALS
+                </button>
+<button class="border border-outline text-on-surface font-headline font-bold uppercase py-4 px-12 text-sm tracking-widest hover:bg-surface-variant transition-colors">
+                    DOWNLOAD_SPEC_PDF
+                </button>
+</div>
+</section>
+</main>
+<!-- FOOTER SHELL -->
+<footer class="fixed bottom-0 left-0 w-full z-50 bg-[#0e0e0e] border-t border-[#494847]/30 flex justify-between items-center px-6 py-2 opacity-90">
+<div class="text-[#69f6b8] font-bold font-mono text-[10px] uppercase tracking-widest">
+            SYSTEM_STATUS: OPERATIONAL // KERNEL_VER: 4.9.2 //
+        </div>
+<div class="flex gap-6 font-mono text-[10px] uppercase tracking-widest">
+<span class="text-[#69f6b8]">LATENCY: 14MS</span>
+<span class="text-[#adaaaa] hover:text-[#ffffff] cursor-pointer transition-colors">UPTIME: 99.9%</span>
+<span class="text-[#adaaaa] hover:text-[#ffffff] cursor-pointer transition-colors">ENCRYPTED_FEED</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TACTICAL_INTEL_V1 // PERFORMANCE_INDEX</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-dim": "#58e7ab",
+                        "surface-tint": "#69f6b8",
+                        "primary-fixed-dim": "#58e7ab",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary": "#005360",
+                        "inverse-on-surface": "#565554",
+                        "surface-container": "#1a1919",
+                        "primary-container": "#06b77f",
+                        "tertiary-container": "#00dcfd",
+                        "tertiary-fixed": "#00dcfd",
+                        "on-secondary-fixed": "#004939",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary-container": "#006b56",
+                        "secondary-fixed-dim": "#47edc4",
+                        "inverse-primary": "#006d4a",
+                        "on-background": "#ffffff",
+                        "error-dim": "#d7383b",
+                        "on-primary-container": "#002919",
+                        "outline": "#777575",
+                        "surface-bright": "#2c2c2c",
+                        "on-secondary-fixed-variant": "#006853",
+                        "surface-container-highest": "#262626",
+                        "on-surface": "#ffffff",
+                        "surface-dim": "#0e0e0e",
+                        "surface-container-high": "#201f1f",
+                        "secondary-fixed": "#5afcd2",
+                        "on-tertiary-container": "#004955",
+                        "on-primary": "#005a3c",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-fixed-variant": "#006544",
+                        "inverse-surface": "#fcf8f8",
+                        "error-container": "#9f0519",
+                        "outline-variant": "#494847",
+                        "on-surface-variant": "#adaaaa",
+                        "tertiary": "#77e6ff",
+                        "background": "#0e0e0e",
+                        "on-error-container": "#ffa8a3",
+                        "on-primary-fixed": "#00452d",
+                        "surface-variant": "#262626",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-tertiary-fixed": "#00343c",
+                        "error": "#ff716c",
+                        "on-secondary-container": "#defff2",
+                        "primary": "#69f6b8",
+                        "surface": "#0e0e0e",
+                        "surface-container-low": "#131313",
+                        "on-secondary": "#005d4a",
+                        "secondary-dim": "#47edc4",
+                        "tertiary-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-error": "#490006"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e;
+            background-image: linear-gradient(#49484710 1px, transparent 1px), linear-gradient(90deg, #49484710 1px, transparent 1px);
+            background-size: 24px 24px;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        .mono-data { font-variant-numeric: tabular-nums; letter-spacing: -0.05em; }
+        .heatmap-cell { mix-blend-mode: screen; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<nav class="flex justify-between items-center w-full px-6 py-4 bg-[#0e0e0e] border-b border-[#494847]/30 sticky top-0 z-50">
+<div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">TACTICAL_INTEL_V1</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20match%20center.html">MATCH CENTER</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20performance index.html">PERFORMANCE INDEX</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">SYSTEM ARCHIVE</a>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">analytics</span>
+<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">terminal</span>
+<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">settings</span>
+</div>
+</nav>
+<main class="flex-grow p-6 space-y-6">
+<!-- Dashboard Header -->
+<header class="flex justify-between items-end border-l-4 border-primary pl-4">
+<div>
+<h1 class="font-headline text-4xl font-black uppercase tracking-tighter text-on-surface">PERFORMANCE_INDEX</h1>
+<p class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant">Live Data Stream // Source: Opta_Engine_v4</p>
+</div>
+<div class="text-right">
+<span class="text-primary font-bold block text-sm font-headline">SYSTEM_STATUS: NOMINAL</span>
+<span class="text-on-surface-variant text-[10px] mono-data uppercase"></span>
+</div>
+</header>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Column 1: Leaderboards (G/A/xG) -->
+<section class="md:col-span-4 space-y-6">
+<div class="bg-surface-container-low border border-outline-variant/30 p-4">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase text-on-surface-variant">Top_Gainers (xG_Delta)</h2>
+<span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+</div>
+<div class="space-y-1">
+<!-- Player Row -->
+<div class="flex items-center justify-between p-2 bg-surface hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all" data-alt="close up headshot of athlete focused expression high contrast black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYQkhibfTPwW9OmGk6y95HccZyeFP_RfxHU1Nm50ak8n0xdVOUhLShzwodWVriAG8ug4Cwxu4QR7_2fTT2KGMo2Osl5Aj-qTkofaB8EArWUyZS8H7nsYfDAOIWPqMsJcECYMNQHBfDr4krmT0rq8FRhuEPVpyFLmDt83ghmpNXjo_cBF1PXyMWc9TOYUKrZGd4ahX1koZOoZ71uRzET9whCErhdAz0l4BLQacwcUlZlr0-xME0pMMbNu_OtoU1L0rtzi1CJxMYOnjk"/>
+</div>
+<div>
+<div class="text-xs font-bold font-headline uppercase">Player</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Real Madrid / MF</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-primary mono-data">+2.41</div>
+<div class="text-[10px] text-primary/50 mono-data">▲ 14.2%</div>
+</div>
+</div>
+<!-- Player Row -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all" data-alt="close up headshot of athlete focused expression high contrast black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYQkhibfTPwW9OmGk6y95HccZyeFP_RfxHU1Nm50ak8n0xdVOUhLShzwodWVriAG8ug4Cwxu4QR7_2fTT2KGMo2Osl5Aj-qTkofaB8EArWUyZS8H7nsYfDAOIWPqMsJcECYMNQHBfDr4krmT0rq8FRhuEPVpyFLmDt83ghmpNXjo_cBF1PXyMWc9TOYUKrZGd4ahX1koZOoZ71uRzET9whCErhdAz0l4BLQacwcUlZlr0-xME0pMMbNu_OtoU1L0rtzi1CJxMYOnjk"/>
+</div>
+<div>
+<div class="text-xs font-bold font-headline uppercase">Player</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Man City / FW</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-primary mono-data">+1.88</div>
+<div class="text-[10px] text-primary/50 mono-data">▲ 8.1%</div>
+</div>
+</div>
+<!-- Player Row -->
+<div class="flex items-center justify-between p-2 bg-surface hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all" data-alt="close up headshot of athlete focused expression high contrast black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYQkhibfTPwW9OmGk6y95HccZyeFP_RfxHU1Nm50ak8n0xdVOUhLShzwodWVriAG8ug4Cwxu4QR7_2fTT2KGMo2Osl5Aj-qTkofaB8EArWUyZS8H7nsYfDAOIWPqMsJcECYMNQHBfDr4krmT0rq8FRhuEPVpyFLmDt83ghmpNXjo_cBF1PXyMWc9TOYUKrZGd4ahX1koZOoZ71uRzET9whCErhdAz0l4BLQacwcUlZlr0-xME0pMMbNu_OtoU1L0rtzi1CJxMYOnjk"/>
+</div>
+<div>
+<div class="text-xs font-bold font-headline uppercase">Player</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Real Madrid / FW</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-primary mono-data">+1.04</div>
+<div class="text-[10px] text-primary/50 mono-data">▲ 5.5%</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/30 p-4">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase text-on-surface-variant">Underperformers (Delta)</h2>
+<span class="material-symbols-outlined text-error text-sm">trending_down</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between p-2 bg-surface hover:bg-surface-container-high transition-colors group">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all" data-alt="close up headshot of athlete focused expression high contrast black and white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYQkhibfTPwW9OmGk6y95HccZyeFP_RfxHU1Nm50ak8n0xdVOUhLShzwodWVriAG8ug4Cwxu4QR7_2fTT2KGMo2Osl5Aj-qTkofaB8EArWUyZS8H7nsYfDAOIWPqMsJcECYMNQHBfDr4krmT0rq8FRhuEPVpyFLmDt83ghmpNXjo_cBF1PXyMWc9TOYUKrZGd4ahX1koZOoZ71uRzET9whCErhdAz0l4BLQacwcUlZlr0-xME0pMMbNu_OtoU1L0rtzi1CJxMYOnjk"/>
+</div>
+<div>
+<div class="text-xs font-bold font-headline uppercase">Player</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Inter Milan / FW</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-error mono-data">-0.92</div>
+<div class="text-[10px] text-error/50 mono-data">▼ 3.2%</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Column 2: Data Matrix & Heatmap -->
+<section class="md:col-span-8 space-y-6">
+<!-- Performance Matrix Table -->
+<div class="bg-surface-container-low border border-outline-variant/30">
+<div class="p-4 border-b border-outline-variant/30 flex justify-between items-center">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase">Global_Performance_Matrix</h2>
+<div class="flex space-x-2">
+<button class="bg-primary text-on-primary px-3 py-1 text-[10px] font-bold uppercase">Export CSV</button>
+<button class="border border-outline px-3 py-1 text-[10px] font-bold uppercase text-on-surface-variant">Filter</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container uppercase text-[10px] font-bold tracking-widest text-on-surface-variant border-b border-outline-variant/20">
+<th class="px-4 py-3">Player_Identity</th>
+<th class="px-4 py-3 text-right">G</th>
+<th class="px-4 py-3 text-right">A</th>
+<th class="px-4 py-3 text-right">xG</th>
+<th class="px-4 py-3 text-right">Intensity_Index</th>
+<th class="px-4 py-3 text-center">Status</th>
+</tr>
+</thead>
+<tbody class="text-xs mono-data">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-high">
+<td class="px-4 py-4 flex items-center space-x-2">
+<span class="text-primary font-bold">01</span>
+<span class="font-bold uppercase font-headline">Rodri</span>
+</td>
+<td class="px-4 py-4 text-right">04</td>
+<td class="px-4 py-4 text-right">09</td>
+<td class="px-4 py-4 text-right">3.14</td>
+<td class="px-4 py-4 text-right text-primary">98.2</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-primary/10 text-primary px-2 py-0.5 text-[9px] font-bold uppercase border border-primary/20">Optimal</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-high bg-surface-container-lowest/30">
+<td class="px-4 py-4 flex items-center space-x-2">
+<span class="text-on-surface-variant font-bold">02</span>
+<span class="font-bold uppercase font-headline">M. Salah</span>
+</td>
+<td class="px-4 py-4 text-right">18</td>
+<td class="px-4 py-4 text-right">10</td>
+<td class="px-4 py-4 text-right">16.45</td>
+<td class="px-4 py-4 text-right text-primary">92.4</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-primary/10 text-primary px-2 py-0.5 text-[9px] font-bold uppercase border border-primary/20">Optimal</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-high">
+<td class="px-4 py-4 flex items-center space-x-2">
+<span class="text-on-surface-variant font-bold">03</span>
+<span class="font-bold uppercase font-headline">D. Rice</span>
+</td>
+<td class="px-4 py-4 text-right">05</td>
+<td class="px-4 py-4 text-right">07</td>
+<td class="px-4 py-4 text-right">4.21</td>
+<td class="px-4 py-4 text-right text-primary">95.8</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-secondary-container/20 text-secondary px-2 py-0.5 text-[9px] font-bold uppercase border border-secondary/20">Stable</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-high bg-surface-container-lowest/30">
+<td class="px-4 py-4 flex items-center space-x-2">
+<span class="text-on-surface-variant font-bold">04</span>
+<span class="font-bold uppercase font-headline">K. De Bruyne</span>
+</td>
+<td class="px-4 py-4 text-right">03</td>
+<td class="px-4 py-4 text-right">12</td>
+<td class="px-4 py-4 text-right">5.82</td>
+<td class="px-4 py-4 text-right text-error">78.1</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-error/10 text-error px-2 py-0.5 text-[9px] font-bold uppercase border border-error/20">Fatigue</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Tactical Visualization & Analysis -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-surface-container-low border border-outline-variant/30 p-4">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase mb-4 text-on-surface-variant">Spatial_Heatmap </h2>
+<div class="aspect-video relative bg-[#131313] border border-outline-variant/50 overflow-hidden">
+<div class="absolute inset-0 opacity-20">
+<div class="w-full h-full bg-[radial-gradient(circle_at_50%_50%,_#69f6b8_0%,_transparent_70%)] blur-2xl"></div>
+<div class="w-1/2 h-1/2 absolute top-0 right-0 bg-[radial-gradient(circle_at_50%_50%,_#ff716c_0%,_transparent_60%)] blur-3xl opacity-40"></div>
+</div>
+
+
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant/30 p-4">
+<h2 class="font-headline text-sm font-bold tracking-widest uppercase mb-4 text-on-surface-variant">Intensity_Velocity_Trend</h2>
+<div class="aspect-video relative bg-[#131313] border border-outline-variant/50 p-4 flex flex-col justify-between">
+
+</div>
+<div class="flex justify-between text-[8px] mono-data text-on-surface-variant uppercase mt-2">
+
+</div>
+</div>
+<div class="mt-4 p-2 bg-surface border-l-2 border-primary">
+<p class="text-[10px] uppercase tracking-tighter leading-tight text-on-surface-variant">
+<span class="text-primary font-bold">INSIGHT:</span> DESCRIPTION
+                            </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex justify-between items-center w-full px-6 py-2 bg-[#0e0e0e] border-t border-[#494847]/30 bg-grid-pattern opacity-90 z-50">
+<div class="text-[#69f6b8] font-bold font-mono text-[10px] uppercase tracking-widest">SYSTEM_STATUS: OPERATIONAL // KERNEL_VER: 4.9.2 // </div>
+<div class="flex space-x-6">
+<a class="font-mono text-[10px] uppercase tracking-widest text-[#69f6b8]" href="#">LATENCY: 14MS</a>
+<a class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] hover:text-[#ffffff]" href="#">UPTIME: 99.9%</a>
+<a class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] hover:text-[#ffffff]" href="#">ENCRYPTED_FEED</a>
+</div>
+</footer>
+</body></html>

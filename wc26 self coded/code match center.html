@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TACTICAL_INTEL_V1 // MATCH_DETAIL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-dim": "#58e7ab",
+                        "surface-tint": "#69f6b8",
+                        "primary-fixed-dim": "#58e7ab",
+                        "surface-container-lowest": "#000000",
+                        "on-tertiary": "#005360",
+                        "inverse-on-surface": "#565554",
+                        "surface-container": "#1a1919",
+                        "primary-container": "#06b77f",
+                        "tertiary-container": "#00dcfd",
+                        "tertiary-fixed": "#00dcfd",
+                        "on-secondary-fixed": "#004939",
+                        "tertiary-fixed-dim": "#00cdeb",
+                        "secondary-container": "#006b56",
+                        "secondary-fixed-dim": "#47edc4",
+                        "inverse-primary": "#006d4a",
+                        "on-background": "#ffffff",
+                        "error-dim": "#d7383b",
+                        "on-primary-container": "#002919",
+                        "outline": "#777575",
+                        "surface-bright": "#2c2c2c",
+                        "on-secondary-fixed-variant": "#006853",
+                        "surface-container-highest": "#262626",
+                        "on-surface": "#ffffff",
+                        "surface-dim": "#0e0e0e",
+                        "surface-container-high": "#201f1f",
+                        "secondary-fixed": "#5afcd2",
+                        "on-tertiary-container": "#004955",
+                        "on-primary": "#005a3c",
+                        "primary-fixed": "#69f6b8",
+                        "on-primary-fixed-variant": "#006544",
+                        "inverse-surface": "#fcf8f8",
+                        "error-container": "#9f0519",
+                        "outline-variant": "#494847",
+                        "on-surface-variant": "#adaaaa",
+                        "tertiary": "#77e6ff",
+                        "background": "#0e0e0e",
+                        "on-error-container": "#ffa8a3",
+                        "on-primary-fixed": "#00452d",
+                        "surface-variant": "#262626",
+                        "on-tertiary-fixed-variant": "#005360",
+                        "on-tertiary-fixed": "#00343c",
+                        "error": "#ff716c",
+                        "on-secondary-container": "#defff2",
+                        "primary": "#69f6b8",
+                        "surface": "#0e0e0e",
+                        "surface-container-low": "#131313",
+                        "on-secondary": "#005d4a",
+                        "secondary-dim": "#47edc4",
+                        "tertiary-dim": "#00cdeb",
+                        "secondary": "#5afcd2",
+                        "on-error": "#490006"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+  body {
+    background-color: #0e0e0e;
+}
+
+main {
+    background-image: url("Screenshot 2026-04-24 at 15.02.01.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+    
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-grid-pattern {
+            background-image: radial-gradient(circle, #494847 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .pitch-lines {
+            border: 1px solid rgba(73, 72, 71, 0.4);
+        }
+        .hud-scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(105, 246, 184, 0.05) 51%, transparent 100%);
+            background-size: 100% 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-hidden h-screen select-none">
+<!-- TOP APP BAR (The Anchor) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#0e0e0e] border-b border-[#494847]/30 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 group">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+<span class="font-mono text-[10px] tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">TERMINAL_BACK</span>
+</button>
+<div class="h-4 w-px bg-outline-variant/30"></div>
+<div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline uppercase">TACTICAL_INTEL_V1</div>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20match%20center.html">MATCH CENTER</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">SYSTEM ARCHIVE</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-[#201f1f] p-2 transition-colors cursor-pointer" data-icon="analytics">analytics</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-[#201f1f] p-2 transition-colors cursor-pointer" data-icon="terminal">terminal</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-[#201f1f] p-2 transition-colors cursor-pointer" data-icon="settings">settings</span>
+</div>
+</header>
+
+<main class="relative w-full h-screen pt-16 overflow-hidden">
+<!-- Active Tracking Lines -->
+<div class="absolute -top-10 left-1/2 w-px h-10 bg-primary/50"></div>
+<div class="absolute -top-16 left-1/2 -translate-x-1/2 bg-primary px-2 py-0.5 text-[8px] font-bold text-on-primary uppercase">ACTIVE_TRACKING</div>
+</div>
+
+
+
+</div>
+</div>
+<!-- FLOATING DATA MODULES -->
+<!-- TOP HUD: Match Header -->
+<div class="absolute top-20 left-1/2 -translate-x-1/2 flex items-center gap-12 bg-surface-container-high/80 backdrop-blur-md px-10 py-4 border border-outline-variant/30">
+<div class="text-center">
+<div class="font-mono text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">TEAM 1</div>
+<div class="font-headline font-black text-2xl text-primary tracking-widest">Argentina</div>
+</div>
+<div class="flex flex-col items-center">
+<div class="font-headline font-black text-4xl tracking-tighter flex gap-4">
+<span>?</span>
+<span class="text-on-surface-variant opacity-30">:</span>
+<span>?</span>
+</div>
+<div class="bg-primary/10 border border-primary/40 px-2 py-0.5 mt-2">
+<span class="font-mono text-[10px] text-primary animate-pulse">LIVE // 64:12</span>
+</div>
+</div>
+<div class="text-center">
+<div class="font-mono text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">TEAM 2</div>
+<div class="font-headline font-black text-2xl text-on-surface tracking-widest opacity-80">MAN_RED</div>
+</div>
+</div>
+<!-- LEFT MODULE: Match Moments -->
+<div class="absolute top-24 left-6 w-72 flex flex-col gap-4">
+<div class="bg-surface-container-high border border-outline-variant/30">
+<div class="bg-surface-variant px-3 py-2 flex justify-between items-center border-b border-outline-variant/30">
+<span class="font-mono text-[10px] font-bold text-primary tracking-widest uppercase">MATCH_MOMENTS</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="history">history</span>
+</div>
+<div class="p-0 max-h-[400px] overflow-y-auto">
+<!-- Moment Item -->
+<div class="p-3 border-b border-outline-variant/10 hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono text-[10px] text-primary">12' GOAL</span>
+<span class="font-mono text-[10px] text-on-surface-variant">? - ?</span>
+</div>
+<div class="text-[11px] font-medium leading-tight text-on-surface">Description</div>
+</div>
+<!-- Moment Item -->
+<div class="p-3 border-b border-outline-variant/10 bg-primary/5">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono text-[10px] text-primary">44' GOAL</span>
+<span class="font-mono text-[10px] text-on-surface-variant">? - ?</span>
+</div>
+<div class="text-[11px] font-medium leading-tight text-on-surface">Description</div>
+</div>
+<!-- Moment Item -->
+<div class="p-3 border-b border-outline-variant/10 hover:bg-surface-bright transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono text-[10px] text-error">58' YELLOW</span>
+<span class="font-mono text-[10px] text-on-surface-variant">SUB_?</span>
+</div>
+<div class="text-[11px] font-medium leading-tight text-on-surface-variant">Description</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT MODULE: System Notes -->
+<div class="absolute top-24 right-6 w-80 flex flex-col gap-4">
+<div class="bg-surface-container-high border border-outline-variant/30">
+<div class="bg-surface-variant px-3 py-2 flex justify-between items-center border-b border-outline-variant/30">
+<span class="font-mono text-[10px] font-bold text-tertiary tracking-widest uppercase">AI COACH</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="terminal">terminal</span>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="space-y-1">
+<div class="font-mono text-[9px] text-on-surface-variant">AI_COACH_LOG &gt;</div>
+<div class="text-xs text-on-surface leading-relaxed border-l-2 border-tertiary pl-3">
+                            
+                        </div>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-lowest p-2 border border-outline-variant/20">
+<div class="font-mono text-[8px] text-on-surface-variant mb-1 uppercase">xG_PREDICT</div>
+<div class="font-headline font-bold text-lg text-primary">2.48</div>
+</div>
+<div class="bg-surface-container-lowest p-2 border border-outline-variant/20">
+<div class="font-mono text-[8px] text-on-surface-variant mb-1 uppercase">WIN_PROB</div>
+<div class="font-headline font-bold text-lg text-tertiary">88%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Asset Comparison -->
+<div class="bg-surface-container-high border border-outline-variant/30">
+<div class="bg-surface-variant px-3 py-2 border-b border-outline-variant/30">
+<span class="font-mono text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">LIVE_STATS_DELTA</span>
+</div>
+<div class="p-4 space-y-3">
+<div class="space-y-1">
+<div class="flex justify-between font-mono text-[9px] uppercase">
+<span class="text-on-surface">POSSESSION</span>
+<span class="text-primary">62% / 38%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest flex">
+<div class="h-full bg-primary" style="width: 62%"></div>
+<div class="h-full bg-error" style="width: 38%"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between font-mono text-[9px] uppercase">
+<span class="text-on-surface">DISTANCE_RUN</span>
+<span class="text-primary">78.4KM</span>
+</div>
+<div class="w-full h-1 bg-surface-container-lowest">
+<div class="h-full bg-primary" style="width: 72%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM HUD: Asset Controls -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4">
+<button class="bg-surface-container-high border border-primary px-6 py-2 flex items-center gap-3 hover:bg-primary/10 transition-colors group">
+<span class="material-symbols-outlined text-primary" data-icon="videocam">videocam</span>
+<span class="font-mono text-xs font-bold text-primary uppercase tracking-widest">SWITCH_CAM: TACTICAL_POV</span>
+</button>
+<button class="bg-surface-container-high border border-outline-variant px-6 py-2 flex items-center gap-3 hover:bg-surface-bright transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="filter_list">filter_list</span>
+<span class="font-mono text-xs font-bold text-on-surface uppercase tracking-widest">LAYER: HEATMAP</span>
+</button>
+<button class="bg-surface-container-high border border-outline-variant px-6 py-2 flex items-center gap-3 hover:bg-surface-bright transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="share">share</span>
+<span class="font-mono text-xs font-bold text-on-surface uppercase tracking-widest">EXPORT_LOG</span>
+</button>
+</div>
+<!-- SIDEBAR DECORATION (Technical Metadata) -->
+<div class="absolute left-6 bottom-10 flex flex-col gap-1 opacity-40 pointer-events-none">
+<div class="font-mono text-[8px] text-primary">LATENCY: 14MS</div>
+<div class="font-mono text-[8px] text-on-surface-variant">STREAM_VER: 4.9.22</div>
+<div class="font-mono text-[8px] text-on-surface-variant">BUFFER_STATE: OPTIMAL</div>
+<div class="font-mono text-[8px] text-on-surface-variant">PACKET_LOSS: 0.00%</div>
+</div>
+</main>
+<!-- FOOTER -->
+<footer class="fixed bottom-0 left-0 right-0 z-50 bg-[#0e0e0e] border-t border-[#494847]/30 flex justify-between items-center w-full px-6 py-2 bg-grid-pattern opacity-90">
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#69f6b8] font-bold">SYSTEM_STATUS: OPERATIONAL // KERNEL_VER: 4.9.2</div>
+<div class="flex gap-6">
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#69f6b8]">LATENCY: 14MS</span>
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] hover:text-[#ffffff] cursor-default">UPTIME: 99.9%</span>
+<span class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] hover:text-[#ffffff] cursor-default">ENCRYPTED_FEED</span>
+</div>
+<div class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa]">
+</footer>
+</body></html>
