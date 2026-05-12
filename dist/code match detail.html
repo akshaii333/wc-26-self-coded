@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>TACTICAL_INTEL_V1 // MATCH_DETAIL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+<script src="wc26-meridian-lite.js"></script>
+<script id="tailwind-config">
+ tailwind.config = {
+  darkMode: 'class',
+  theme: {
+   extend: {
+    colors: {
+     primary: '#69f6b8',
+     secondary: '#5afcd2',
+     tertiary: '#77e6ff',
+     error: '#ff716c',
+     surface: '#0e0e0e',
+     'surface-container-lowest': '#000000',
+     'surface-container-low': '#131313',
+     'surface-container': '#1a1919',
+     'surface-container-high': '#201f1f',
+     'surface-container-highest': '#262626',
+     'on-surface': '#ffffff',
+     'on-surface-variant': '#adaaaa',
+     'outline-variant': '#494847'
+    },
+    fontFamily: {
+     headline: ['Space Grotesk'],
+     body: ['Inter'],
+     mono: ['JetBrains Mono']
+    }
+   }
+  }
+ }
+</script>
+<style>
+ body {
+  background-color: #0e0e0e;
+  background-image:
+   linear-gradient(rgba(14, 14, 14, 0.86), rgba(14, 14, 14, 0.9)),
+   linear-gradient(rgba(73, 72, 71, 0.12) 1px, transparent 1px),
+   linear-gradient(90deg, rgba(73, 72, 71, 0.12) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+  background-position: center, 0 0, 0 0;
+  background-repeat: no-repeat, repeat, repeat;
+  background-attachment: fixed, fixed, fixed;
+ }
+ .material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+ }
+ .match-pitch-shell {
+  position: fixed;
+  inset: 3.75rem 0 0 0;
+  width: 100vw;
+  height: calc(100vh - 3.75rem);
+  padding: 1rem 1rem 1rem 1rem;
+  box-sizing: border-box;
+  transform: none;
+  z-index: 5;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  pointer-events: none;
+ }
+ @media (max-width: 900px) {
+  .match-pitch-shell {
+   inset: 0;
+  }
+ }
+ .match-pitch {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border: 1px solid rgba(73, 72, 71, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(105, 246, 184, 0.08), 0 28px 60px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.04));
+  pointer-events: auto;
+  transform: scale(0.92);
+  transform-origin: center center;
+ }
+ @media (max-width: 800px) {
+  .match-pitch {
+   transform: scale(0.9);
+  }
+ }
+ .match-pitch__summary {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  display: grid;
+  gap: 0.25rem;
+  z-index: 3;
+  pointer-events: none;
+ }
+ .match-pitch__summary span {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.2rem 0.45rem;
+  background: rgba(14, 14, 14, 0.7);
+  border: 1px solid rgba(105, 246, 184, 0.2);
+  color: #f7fff9;
+  font-family: JetBrains Mono, monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+ }
+ .match-pitch__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+ }
+ .player-overlay {
+  position: absolute;
+  width: 92px;
+  height: 132px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 3;
+  transition: transform 160ms ease, filter 160ms ease;
+ }
+ .player-overlay:hover,
+ .player-overlay:focus-visible {
+  transform: translate(-50%, -50%) scale(1.06);
+  filter: drop-shadow(0 0 12px rgba(105, 246, 184, 0.2));
+  outline: none;
+ }
+ @media (max-width: 800px) {
+  .player-overlay {
+  width: 76px;
+  height: 116px;
+  }
+ }
+ .player-ring {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 9999px;
+  background: rgba(14, 14, 14, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+ }
+ .player-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: var(--player-ring-gradient, conic-gradient(#69f6b8 0 40%, #5afcd2 0 72%, #77e6ff 0 86%, rgba(255, 255, 255, 0.08) 0 100%));
+  -webkit-mask: radial-gradient(circle, transparent 53%, #000 54%);
+  mask: radial-gradient(circle, transparent 53%, #000 54%);
+ }
+ .player-ring__core {
+  position: relative;
+  z-index: 1;
+  width: 72%;
+  height: 72%;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(105, 246, 184, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  font-family: Space Grotesk, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0;
+ }
+ .player-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  white-space: nowrap;
+  padding: 0.18rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(73, 72, 71, 0.35);
+  background: rgba(245, 247, 249, 0.95);
+  color: #25344a;
+  font-family: JetBrains Mono, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+ }
+ .player-chip .material-symbols-outlined {
+  font-size: 11px;
+ }
+ .player-chip--top {
+  position: absolute;
+  left: 50%;
+  top: -29px;
+  transform: translateX(-50%);
+ }
+ .player-chip--left {
+  left: -36px;
+  top: 40px;
+ }
+ .player-chip--right {
+  right: -38px;
+  top: 40px;
+ }
+ .player-name-pill {
+  position: absolute;
+  left: 50%;
+  top: 76px;
+  transform: translateX(-50%);
+  min-width: 76px;
+  max-width: 108px;
+  padding: 0.3rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(73, 72, 71, 0.26);
+  background: rgba(239, 242, 247, 0.96);
+  color: #43556f;
+  font-family: Inter, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+ }
+ @media (max-width: 800px) {
+  .player-ring {
+   width: 42px;
+   height: 42px;
+  }
+  .player-ring__core {
+   font-size: 22px;
+  }
+  .player-chip {
+   font-size: 9px;
+   padding: 0.12rem 0.38rem;
+  }
+  .player-chip--top {
+   top: -25px;
+  }
+  .player-chip--left {
+   left: -28px;
+   top: 34px;
+  }
+  .player-chip--right {
+   right: -30px;
+   top: 34px;
+  }
+  .player-name-pill {
+   top: 64px;
+   min-width: 66px;
+   font-size: 8px;
+  }
+ }
+ body[data-wc26-zoom='overview'] .match-pitch {
+  transform: scale(0.86);
+ }
+ body[data-wc26-zoom='overview'] .player-chip {
+  opacity: 0.45;
+ }
+ body[data-wc26-zoom='overview'] .player-name-pill {
+  opacity: 0;
+  transform: translateX(-50%) translateY(6px);
+ }
+ body[data-wc26-zoom='forensic'] .match-pitch {
+  transform: scale(0.97);
+ }
+ body[data-wc26-zoom='forensic'] .player-ring {
+  box-shadow: 0 0 0 1px rgba(105, 246, 184, 0.16), 0 0 24px rgba(105, 246, 184, 0.08);
+ }
+</style>
+</head>
+<body class="font-body text-on-surface overflow-hidden h-screen">
+<div class="relative w-full h-screen overflow-hidden">
+ <div class="absolute left-0 top-0 z-50 flex h-[3.75rem] w-full items-center justify-between border-b border-[#494847]/30 bg-[#0e0e0e] px-4 sm:px-6">
+  <div class="flex items-center gap-4">
+   <a href="code%20system archive.html" class="inline-flex items-center justify-center w-10 h-10 border border-[#494847]/40 bg-surface-container-low text-[#69f6b8] hover:bg-surface-container-high hover:border-primary transition-colors" aria-label="Return to match archive" title="Return to match archive">
+    <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+   </a>
+   <div>
+    <div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline leading-none">MATCH DETAIL</div>
+    <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.22em] text-[#adaaaa]">TACTICAL_INTEL_V1</div>
+   </div>
+  </div>
+  <div class="hidden md:flex items-center gap-8">
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20match%20detail.html">MATCH DETAIL</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+  </div>
+  <div class="flex items-center gap-3">
+   <div class="relative hidden lg:block">
+    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
+    <input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
+   </div>
+   <div class="flex gap-2">
+    <button id="meridian-zoom-button" class="material-symbols-outlined text-on-surface-variant hover:text-primary" title="Cycle semantic zoom">zoom_in</button>
+    <button id="meridian-panel-toggle" class="material-symbols-outlined text-on-surface-variant hover:text-primary" title="Toggle data layers">view_list</button>
+    <button id="meridian-save-button" class="material-symbols-outlined text-on-surface-variant hover:text-primary" title="Save current view">bookmark</button>
+    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary">analytics</button>
+    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary">terminal</button>
+    <button id="api-settings-button" class="material-symbols-outlined text-on-surface-variant hover:text-primary">settings</button>
+   </div>
+  </div>
+ </div>
+
+<main class="relative w-full h-screen overflow-hidden">
+ <div class="pointer-events-none absolute inset-0 opacity-[0.18]">
+  <div class="absolute left-1/2 top-0 h-40 w-[900px] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl"></div>
+  <div class="absolute right-0 top-32 h-64 w-64 rounded-full bg-tertiary/10 blur-3xl"></div>
+ </div>
+
+ <section class="relative h-full w-full">
+  <div class="pointer-events-none absolute left-1/2 top-16 z-30 -translate-x-1/2">
+   <div id="match-score-banner" data-wc26-layer="scoreBanner" class="rounded-none border border-[#ff4d4d]/45 bg-surface-container-high/90 px-4 py-2 backdrop-blur-md"></div>
+  </div>
+  <div id="match-pitch" class="match-pitch-shell"></div>
+  <div id="selected-player-shell" data-wc26-layer="drawer" class="pointer-events-auto hidden absolute right-6 bottom-20 z-30 w-[min(22rem,calc(100vw-3rem))] rounded-none border border-outline-variant/30 bg-surface-container-high/90 p-4 backdrop-blur-md"></div>
+ </section>
+</main>
+
+<div id="meridian-layer-panel" class="absolute right-6 top-[4.75rem] z-40 hidden w-[18rem] border border-outline-variant/30 bg-surface-container-high/95 p-4 backdrop-blur-md">
+ <div class="flex items-center justify-between gap-3">
+  <div>
+   <div class="font-headline text-xs font-bold uppercase tracking-[0.2em] text-primary">Meridian Layers</div>
+   <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-on-surface-variant">semantic zoom // saved states</div>
+  </div>
+  <button id="meridian-close-panel" class="material-symbols-outlined text-on-surface-variant hover:text-primary">close</button>
+ </div>
+ <div class="mt-4 space-y-2 text-xs uppercase tracking-[0.18em] text-on-surface-variant">
+  <label class="flex items-center justify-between gap-3 border border-outline-variant/20 bg-surface-container-lowest px-3 py-2"><span>Score Banner</span><input type="checkbox" data-layer-toggle="scoreBanner" class="accent-[#69f6b8]" checked/></label>
+  <label class="flex items-center justify-between gap-3 border border-outline-variant/20 bg-surface-container-lowest px-3 py-2"><span>Pitch Summary</span><input type="checkbox" data-layer-toggle="pitchSummary" class="accent-[#69f6b8]" checked/></label>
+  <label class="flex items-center justify-between gap-3 border border-outline-variant/20 bg-surface-container-lowest px-3 py-2"><span>Player Chips</span><input type="checkbox" data-layer-toggle="playerChips" class="accent-[#69f6b8]" checked/></label>
+  <label class="flex items-center justify-between gap-3 border border-outline-variant/20 bg-surface-container-lowest px-3 py-2"><span>Player Names</span><input type="checkbox" data-layer-toggle="playerNames" class="accent-[#69f6b8]" checked/></label>
+  <label class="flex items-center justify-between gap-3 border border-outline-variant/20 bg-surface-container-lowest px-3 py-2"><span>Player Drawer</span><input type="checkbox" data-layer-toggle="drawer" class="accent-[#69f6b8]" checked/></label>
+ </div>
+</div>
+
+ </div>
+<footer class="bg-[#0e0e0e] border-t border-[#494847]/30 flex justify-between items-center w-full px-6 py-2 bg-grid-pattern opacity-90 fixed bottom-0">
+ <div class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa]">SYSTEM_STATUS: <span class="text-[#69f6b8]">OPERATIONAL</span> // KERNEL_VER: 4.9.2 //</div>
+  <div class="flex flex-wrap gap-6">
+   <span class="font-mono text-[10px] uppercase tracking-widest text-[#69f6b8]">LATENCY: 14MS</span>
+   <span class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa]">BUFFER_STATE: OPTIMAL</span>
+   <span class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa]">ENCRYPTED_FEED</span>
+  </div>
+  <div class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa]"></div>
+</footer>
+
+<script>
+(() => {
+ const params = new URLSearchParams(window.location.search);
+ const rawMatchId = params.get('match') || '';
+ const rawHome = params.get('home') || 'HOME';
+ const rawAway = params.get('away') || 'AWAY';
+ const rawStage = params.get('stage') || 'MATCH';
+ const rawDate = params.get('date') || '';
+ const rawScore = params.get('score') || '0 : 0';
+ const intensity = params.get('intensity') || 'Balanced';
+ const hasLineupData = params.get('lineups') !== 'none';
+ const apiBase = params.get('apiBase') || localStorage.getItem('WC26_API_BASE') || 'https://api.football-data.org/v4';
+ const apiToken = params.get('apiToken') || localStorage.getItem('WC26_API_TOKEN') || '';
+ const apiCompetition = params.get('competition') || localStorage.getItem('WC26_COMPETITION') || 'WC';
+ const apiSeason = Number(params.get('season') || localStorage.getItem('WC26_SEASON') || '2026');
+
+ const normalizeStage = (value) => {
+  const cleaned = value.replace(/\*+/g, '').replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
+  if (/^ROUND 16$/i.test(cleaned) || /^ROUND OF 16$/i.test(cleaned)) return 'ROUND OF 16';
+  if (/^SEMIFINAL \d+$/i.test(cleaned) || /^SEMIFINALS?$/i.test(cleaned)) return 'SEMIFINAL';
+  if (/^QUARTERFINAL\b/i.test(cleaned)) return 'QUARTERFINAL';
+  if (/^FINAL$/i.test(cleaned)) return 'FINAL';
+  if (/^GROUP\b/i.test(cleaned)) return cleaned.toUpperCase();
+  return cleaned.toUpperCase();
+ };
+
+ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+ const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+ const teamCode = (value) => value.split(/\s+/).map((part) => part[0] || '').join('').slice(0, 3).toUpperCase();
+ const teamRosterMap = {
+  ARGENTINA: ['Emiliano Martinez', 'Nahuel Molina', 'Cristian Romero', 'Nicolas Otamendi', 'Nicolas Tagliafico', 'Rodrigo De Paul', 'Enzo Fernandez', 'Alexis Mac Allister', 'Angel Di Maria', 'Lionel Messi', 'Julian Alvarez'],
+  AUSTRALIA: ['Mathew Ryan', 'Fran Karacic', 'Kye Rowles', 'Harry Souttar', 'Aziz Behich', 'Jackson Irvine', 'Aaron Mooy', 'Riley McGree', 'Mathew Leckie', 'Mitchell Duke', 'Craig Goodwin'],
+  BELGIUM: ['Thibaut Courtois', 'Toby Alderweireld', 'Koni De Winter', 'Jan Vertonghen', 'Thomas Meunier', 'Amadou Onana', 'Axel Witsel', 'Kevin De Bruyne', 'Leandro Trossard', 'Romelu Lukaku', 'Eden Hazard'],
+  BRAZIL: ['Alisson', 'Danilo', 'Thiago Silva', 'Marquinhos', 'Alex Sandro', 'Casemiro', 'Lucas Paqueta', 'Neymar', 'Raphinha', 'Richarlison', 'Vinicius Junior'],
+  CAMEROON: ['Andre Onana', 'Collins Fai', 'Jean-Charles Castelletto', 'Nicolas Nkoulou', 'Nouhou Tolo', 'Andre-Frank Zambo Anguissa', 'Martin Hongla', 'Vincent Aboubakar', 'Karl Toko Ekambi', 'Bryan Mbeumo', 'Eric Maxim Choupo-Moting'],
+  CANADA: ['Milan Borjan', 'Alistair Johnston', 'Steven Vitoria', 'Kamal Miller', 'Atiba Hutchinson', 'Stephen Eustaquio', 'Jonathan Osorio', 'Junior Hoilett', 'Tajon Buchanan', 'Cyle Larin', 'Jonathan David'],
+  COSTA_RICA: ['Keylor Navas', 'Keysher Fuller', 'Oscar Duarte', 'Francisco Calvo', 'Bryan Oviedo', 'Yeltsin Tejeda', 'Celso Borges', 'Bryan Ruiz', 'Jewison Bennett', 'Joel Campbell', 'Anthony Contreras'],
+  CROATIA: ['Dominik Livakovic', 'Josip Juranovic', 'Dejan Lovren', 'Jozo Gvardiol', 'Borna Sosa', 'Luka Modric', 'Mateo Kovacic', 'Marcelo Brozovic', 'Ivan Perisic', 'Andrej Kramaric', 'Ante Budimir'],
+  DENMARK: ['Kasper Schmeichel', 'Joachim Andersen', 'Andreas Christensen', 'Simon Kjaer', 'Joakim Maehle', 'Pierre-Emile Hojbjerg', 'Thomas Delaney', 'Christian Eriksen', 'Jesper Lindstrom', 'Martin Braithwaite', 'Andreas Cornelius'],
+  ECUADOR: ['Hernan Galindez', 'Preciado', 'Piero Hincapie', 'Felix Torres', 'Pervis Estupinan', 'Moises Caicedo', 'Jhegson Mendez', 'Gonzalo Plata', 'Romario Ibarra', 'Enner Valencia', 'Michael Estrada'],
+  ENGLAND: ['Jordan Pickford', 'Kyle Walker', 'John Stones', 'Harry Maguire', 'Luke Shaw', 'Declan Rice', 'Jude Bellingham', 'Mason Mount', 'Bukayo Saka', 'Harry Kane', 'Raheem Sterling'],
+  FRANCE: ['Hugo Lloris', 'Jules Kounde', 'Raphael Varane', 'Dayot Upamecano', 'Theo Hernandez', 'Aurelien Tchouameni', 'Adrien Rabiot', 'Antoine Griezmann', 'Ousmane Dembele', 'Kylian Mbappe', 'Olivier Giroud'],
+  GERMANY: ['Manuel Neuer', 'Joshua Kimmich', 'Antonio Rudiger', 'Nico Schlotterbeck', 'David Raum', 'Ilkay Gundogan', 'Leon Goretzka', 'Thomas Muller', 'Serge Gnabry', 'Kai Havertz', 'Jamal Musiala'],
+  GHANA: ['Lawrence Ati-Zigi', 'Alidu Seidu', 'Daniel Amartey', 'Mohammed Salisu', 'Jamilu Collins', 'Thomas Partey', 'Salis Abdul Samed', 'Andre Ayew', 'Mohammed Kudus', 'Jordan Ayew', 'Inaki Williams'],
+  IRAN: ['Alireza Beiranvand', 'Sadegh Moharrami', 'Majid Hosseini', 'Morteza Pouraliganji', 'Milad Mohammadi', 'Ehsan Hajsafi', 'Saman Ghoddos', 'Mehdi Taremi', 'Ali Gholizadeh', 'Sardar Azmoun', 'Karim Ansarifard'],
+  JAPAN: ['Shuichi Gonda', 'Miki Yamane', 'Maya Yoshida', 'Ko Itakura', 'Yuto Nagatomo', 'Wataru Endo', 'Hidemasa Morita', 'Daichi Kamada', 'Ritsu Doan', 'Takuma Asano', 'Kaoru Mitoma'],
+  MEXICO: ['Guillermo Ochoa', 'Jorge Sanchez', 'Cesar Montes', 'Hector Moreno', 'Jesus Gallardo', 'Edson Alvarez', 'Hector Herrera', 'Luis Chavez', 'Alexis Vega', 'Hirving Lozano', 'Henry Martin'],
+  MOROCCO: ['Yassine Bounou', 'Achraf Hakimi', 'Romain Saiss', 'Nayef Aguerd', 'Noussair Mazraoui', 'Sofyan Amrabat', 'Azzedine Ounahi', 'Hakim Ziyech', 'Sofiane Boufal', 'Youssef En-Nesyri', 'Abde Ezzalzouli'],
+  NETHERLANDS: ['Andries Noppert', 'Denzel Dumfries', 'Virgil van Dijk', 'Jurrien Timber', 'Nathan Ake', 'Frenkie de Jong', 'Davy Klaassen', 'Cody Gakpo', 'Steven Bergwijn', 'Memphis Depay', 'Daley Blind'],
+  POLAND: ['Wojciech Szczesny', 'Matty Cash', 'Kamil Glik', 'Jan Bednarek', 'Bartosz Bereszynski', 'Grzegorz Krychowiak', 'Piotr Zielinski', 'Sebastian Szymanski', 'Nicola Zalewski', 'Robert Lewandowski', 'Arkadiusz Milik'],
+  PORTUGAL: ['Diogo Costa', 'Joao Cancelo', 'Ruben Dias', 'Pepe', 'Raphael Guerreiro', 'Ruben Neves', 'Bernardo Silva', 'Bruno Fernandes', 'Joao Felix', 'Cristiano Ronaldo', 'Rafael Leao'],
+  QATAR: ['Saad Al Sheeb', 'Pedro Miguel', 'Bassam Al Rawi', 'Boualem Khoukhi', 'Abdelkarim Hassan', 'Karim Boudiaf', 'Assim Madibo', 'Akram Afif', 'Hassan Al Haydos', 'Almoez Ali', 'Muntari'],
+  SAUDI_ARABIA: ['Mohammed Al-Owais', 'Sultan Al-Ghannam', 'Abdulelah Al-Amri', 'Hassan Tambakti', 'Yasser Al-Shahrani', 'Abdullah Otayf', 'Salman Al-Faraj', 'Salem Al-Dawsari', 'Saleh Al-Shehri', 'Firas Al-Buraikan', 'Nawaf Al-Abed'],
+  SENEGAL: ['Edouard Mendy', 'Youssouf Sabaly', 'Kalidou Koulibaly', 'Abdou Diallo', 'Ismail Jakobs', 'Idrissa Gueye', 'Pape Gueye', 'Ismaila Sarr', 'Krepin Diatta', 'Boulaye Dia', 'Sadio Mane'],
+  SERBIA: ['Predrag Rajkovic', 'Strahinja Pavlovic', 'Milos Veljkovic', 'Nikola Milenkovic', 'Filip Kostic', 'Sasa Lukic', 'Sergej Milinkovic-Savic', 'Andrija Zivkovic', 'Dusan Tadic', 'Dusan Vlahovic', 'Aleksandar Mitrovic'],
+  SPAIN: ['Unai Simon', 'Cesar Azpilicueta', 'Aymeric Laporte', 'Rodri', 'Jordi Alba', 'Sergio Busquets', 'Pedri', 'Gavi', 'Ferran Torres', 'Alvaro Morata', 'Marco Asensio'],
+  SWITZERLAND: ['Yann Sommer', 'Silvan Widmer', 'Manuel Akanji', 'Nico Elvedi', 'Ricardo Rodriguez', 'Granit Xhaka', 'Remo Freuler', 'Xherdan Shaqiri', 'Breel Embolo', 'Haris Seferovic', 'Noah Okafor'],
+  TUNISIA: ['Aymen Dahmen', 'Mohamed Drager', 'Montassar Talbi', 'Dylan Bronn', 'Ali Maaloul', 'Aissa Laidouni', 'Ellyes Skhiri', 'Naim Sliti', 'Wahbi Khazri', 'Youssef Msakni', 'Issam Jebali'],
+  UNITED_STATES: ['Matt Turner', 'Sergino Dest', 'Walker Zimmerman', 'Tim Ream', 'Antonee Robinson', 'Tyler Adams', 'Weston McKennie', 'Yunus Musah', 'Christian Pulisic', 'Josh Sargent', 'Tim Weah'],
+  URUGUAY: ['Sergio Rochet', 'Nahitan Nandez', 'Jose Maria Gimenez', 'Diego Godin', 'Matias Vina', 'Federico Valverde', 'Rodrigo Bentancur', 'Matias Vecino', 'Facundo Pellistri', 'Darwin Nunez', 'Luis Suarez'],
+  WALES: ['Wayne Hennessey', 'Connor Roberts', 'Ben Davies', 'Joe Rodon', 'Neco Williams', 'Aaron Ramsey', 'Joe Allen', 'Ethan Ampadu', 'Gareth Bale', 'Brennan Johnson', 'Kieffer Moore']
+ };
+ const rosterForTeam = (teamName) => teamRosterMap[String(teamName || '').toUpperCase().replace(/\s+/g, '_')] || [];
+ const rosterNameForSlot = (teamName, slot, index) => {
+  const roster = rosterForTeam(teamName);
+  if (roster[index]) return roster[index];
+  if (roster.length) return roster[index % roster.length];
+  return `${teamCode(teamName)} ${slot.position}`;
+ };
+ const seedFromString = (value) => {
+  let seed = 0;
+  for (let index = 0; index < value.length; index += 1) seed = (seed * 31 + value.charCodeAt(index)) >>> 0;
+  return seed || 1;
+ };
+ const randomFactory = (seedValue) => {
+  let seed = seedValue >>> 0;
+  return () => {
+   seed = (seed * 1664525 + 1013904223) >>> 0;
+   return seed / 4294967296;
+  };
+ };
+ const parseNumber = (value, fallback = 0) => {
+  const num = Number(value);
+  return Number.isFinite(num) ? num : fallback;
+ };
+ const formatDateForUi = (value) => {
+  if (!value) return '';
+  const dt = new Date(value);
+  if (Number.isNaN(dt.getTime())) return String(value).replace('T', ' ').slice(0, 16);
+  const yyyy = dt.getUTCFullYear();
+  const mm = String(dt.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getUTCDate()).padStart(2, '0');
+  const hh = String(dt.getUTCHours()).padStart(2, '0');
+  const mi = String(dt.getUTCMinutes()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd} ${hh}:${mi}`;
+ };
+
+ const stage = normalizeStage(rawStage);
+ const scoreMatch = rawScore.match(/(\d+)\s*:\s*(\d+)(.*)?$/);
+ const homeScore = scoreMatch ? Number(scoreMatch[1]) : 0;
+ const awayScore = scoreMatch ? Number(scoreMatch[2]) : 0;
+ const scoreNote = scoreMatch && scoreMatch[3] ? scoreMatch[3].replace(/^\s*/, '').replace(/^\(/, '').replace(/\)$/, '').trim() : '';
+ const matchSeed = seedFromString(rawMatchId || `${rawHome}|${rawAway}|${rawDate}|${stage}|${rawScore}`);
+ const venueMap = {
+  'GROUP A': 'Al Bayt Stadium',
+  'GROUP B': 'Khalifa International Stadium',
+  'GROUP C': 'Education City Stadium',
+  'GROUP D': 'Al Janoub Stadium',
+  'GROUP E': '974 Stadium',
+  'GROUP F': 'Lusail Stadium',
+  'GROUP G': 'Al Thumama Stadium',
+  'GROUP H': 'Ahmad Bin Ali Stadium',
+  'ROUND OF 16': 'Al Bayt Stadium',
+  'QUARTERFINAL': 'Education City Stadium',
+  'SEMIFINAL': 'Lusail Stadium',
+  'FINAL': 'Lusail Stadium'
+ };
+
+ const lineupTemplates = {
+  home: [
+   { position: 'GK', x: 8, y: 50 },
+   { position: 'LB', x: 20, y: 18 },
+   { position: 'LCB', x: 18, y: 38 },
+   { position: 'RCB', x: 18, y: 62 },
+   { position: 'RB', x: 20, y: 82 },
+   { position: 'DM', x: 38, y: 28 },
+   { position: 'CM', x: 43, y: 50 },
+   { position: 'AM', x: 38, y: 72 },
+   { position: 'LW', x: 68, y: 18 },
+   { position: 'ST', x: 73, y: 50 },
+   { position: 'RW', x: 68, y: 82 }
+  ],
+  away: [
+   { position: 'GK', x: 92, y: 50 },
+   { position: 'LB', x: 80, y: 82 },
+   { position: 'LCB', x: 82, y: 62 },
+   { position: 'RCB', x: 82, y: 38 },
+   { position: 'RB', x: 80, y: 18 },
+   { position: 'DM', x: 62, y: 72 },
+   { position: 'CM', x: 57, y: 50 },
+   { position: 'AM', x: 62, y: 28 },
+   { position: 'LW', x: 32, y: 82 },
+   { position: 'ST', x: 27, y: 50 },
+   { position: 'RW', x: 32, y: 18 }
+  ]
+ };
+
+ const match = {
+  id: rawMatchId || slugify(`${stage}-${rawDate}-${rawHome}-${rawAway}`),
+  date: rawDate,
+  stage,
+  venue: venueMap[stage] || 'Tournament Stadium',
+  status: homeScore + awayScore > 0 ? 'FINISHED' : 'LIVE',
+  homeScore,
+  awayScore,
+  hasLineupData,
+  homeTeam: { id: 'home', code: teamCode(rawHome), name: rawHome, manager: `${rawHome} Manager`, color: '#69f6b8', textColor: '#052014' },
+  awayTeam: { id: 'away', code: teamCode(rawAway), name: rawAway, manager: `${rawAway} Manager`, color: '#77e6ff', textColor: '#00181d' },
+  homeLineup: [],
+  awayLineup: []
+ };
+
+ const buildLineup = (teamName, side, goalsFor, goalsAgainst) => {
+  const lineupSeed = seedFromString(`${teamName}-${side}-${matchSeed}`);
+  const lineupRnd = randomFactory(lineupSeed ^ (side === 'home' ? 0x51ed : 0xbada));
+  const template = lineupTemplates[side];
+  const code = teamCode(teamName);
+  const bias = goalsFor > goalsAgainst ? 0.8 : goalsFor === goalsAgainst ? 0.25 : -0.15;
+
+  return template.map((slot, index) => {
+   const base = slot.position === 'GK' ? 6.4 : slot.position === 'ST' ? 7.4 : slot.position === 'AM' ? 7.1 : 6.8;
+   const passes = Math.round(clamp((slot.position === 'GK' ? 18 : slot.position === 'ST' ? 22 : 34) + lineupRnd() * 42 + index * 2, 8, 96));
+   const shots = Math.round(clamp((slot.position === 'ST' || slot.position === 'AM' ? 1 : 0) + lineupRnd() * 3, 0, 7));
+   const goals = slot.position === 'ST' ? clamp(Math.round(lineupRnd() * Math.max(1, goalsFor)), 0, 3) : 0;
+   const assists = slot.position === 'AM' || slot.position === 'RW' || slot.position === 'LW' ? clamp(Math.round(lineupRnd() * 2 + bias), 0, 3) : clamp(Math.round(lineupRnd() * 1.2), 0, 2);
+   const rating = Number(clamp(base + lineupRnd() * 1.8 + bias * 0.6, 5.5, 9.9).toFixed(1));
+   return {
+    side,
+    player: {
+     id: `${slugify(teamName)}-${slot.position.toLowerCase()}-${index}`,
+      name: rosterNameForSlot(teamName, slot, index),
+     number: 1 + index,
+     position: slot.position,
+     x: slot.x,
+     y: slot.y,
+     stats: { goals, assists, passes, shots, minutes: slot.position === 'GK' ? 90 : 84 - index, fouls: clamp(Math.round(lineupRnd() * 3), 0, 4), cards: clamp(Math.round(lineupRnd() * 2), 0, 2), rating }
+    }
+   };
+  });
+ };
+
+ const buildTimeline = (fixture) => {
+  const events = [];
+  const goalSources = [];
+  const homeScorers = fixture.homeLineup.filter(({ player }) => player.position === 'ST' || player.position === 'AM');
+  const awayScorers = fixture.awayLineup.filter(({ player }) => player.position === 'ST' || player.position === 'AM');
+
+  for (let i = 0; i < fixture.homeScore; i += 1) goalSources.push({ team: fixture.homeTeam, player: homeScorers[i % Math.max(1, homeScorers.length)]?.player });
+  for (let i = 0; i < fixture.awayScore; i += 1) goalSources.push({ team: fixture.awayTeam, player: awayScorers[i % Math.max(1, awayScorers.length)]?.player });
+
+  goalSources.forEach((source, index) => {
+   const minute = Math.round(clamp(8 + (index + 1) * 12 + (matchSeed % 7), 5, 90));
+   events.push({ minute, type: 'GOAL', team: source.team.code, playerId: source.player?.id || null, playerName: source.player?.name || `${source.team.code} finisher`, description: `${source.team.name} found space in the final third and converted the chance.`, focusPlayer: source.player ? { playerId: source.player.id, playerName: source.player.name, teamCode: source.team.code } : null });
+  });
+
+  if (!events.length) {
+   events.push({ minute: 1, type: 'INFO', team: fixture.homeTeam.code, description: 'No discrete events were captured for this fixture.', focusPlayer: null });
+  }
+
+  return events.sort((left, right) => left.minute - right.minute);
+ };
+
+ const normalizeLineupEntries = (rawLineup) => {
+  if (Array.isArray(rawLineup)) return rawLineup;
+  if (Array.isArray(rawLineup?.startXI)) return rawLineup.startXI;
+  if (Array.isArray(rawLineup?.startingXI)) return rawLineup.startingXI;
+  return [];
+ };
+
+ const readApiLineup = (fixture, side) => {
+  const direct = fixture?.[`${side}Lineup`] || fixture?.[`${side}Team`]?.lineup || fixture?.lineups?.[side];
+  const normalized = normalizeLineupEntries(direct);
+  if (normalized.length) return normalized;
+  if (!Array.isArray(fixture?.lineups)) return [];
+
+  const teamName = side === 'home'
+   ? (fixture?.homeTeam?.name || fixture?.homeTeam?.shortName || '').toLowerCase()
+   : (fixture?.awayTeam?.name || fixture?.awayTeam?.shortName || '').toLowerCase();
+  const matchLineup = fixture.lineups.find((entry) => String(entry?.team?.name || '').toLowerCase() === teamName) || null;
+  if (!matchLineup) return [];
+  return normalizeLineupEntries(matchLineup);
+ };
+
+ const mergeApiLineup = (teamName, side, goalsFor, goalsAgainst, apiEntries) => {
+  const generated = buildLineup(teamName, side, goalsFor, goalsAgainst);
+  if (!apiEntries.length) return generated;
+
+  return generated.map((entry, index) => {
+   const source = apiEntries[index] || {};
+   const sourcePlayer = source.player || source;
+   const name = sourcePlayer?.name || sourcePlayer?.player_name || sourcePlayer?.fullName || entry.player.name;
+   const number = parseNumber(sourcePlayer?.number ?? sourcePlayer?.shirtNumber, entry.player.number);
+   const pos = String(sourcePlayer?.pos || sourcePlayer?.position || entry.player.position).toUpperCase();
+   const minutes = parseNumber(sourcePlayer?.minutes, entry.player.stats.minutes);
+   const passes = parseNumber(sourcePlayer?.passes ?? sourcePlayer?.statistics?.passes?.total, entry.player.stats.passes);
+   const rating = Number(parseNumber(sourcePlayer?.rating ?? sourcePlayer?.statistics?.games?.rating, entry.player.stats.rating).toFixed(1));
+   return {
+    ...entry,
+    player: {
+     ...entry.player,
+     name,
+     number,
+     position: pos,
+     stats: {
+      ...entry.player.stats,
+      minutes,
+      passes,
+      rating
+     }
+    }
+   };
+  });
+ };
+
+ const rebuildDerivedData = () => {
+  if (match.hasLineupData && (!match.homeLineup.length || !match.awayLineup.length)) {
+   match.homeLineup = buildLineup(match.homeTeam.name, 'home', match.homeScore, match.awayScore);
+   match.awayLineup = buildLineup(match.awayTeam.name, 'away', match.awayScore, match.homeScore);
+  }
+  if (!match.hasLineupData) {
+   match.homeLineup = [];
+   match.awayLineup = [];
+  }
+
+  match.stats = {
+   possession: [clamp(Math.round(52 + (match.homeScore - match.awayScore) * 4 + (matchSeed % 7) - 3), 38, 64), 0],
+   totalGoals: match.homeScore + match.awayScore,
+   winProbability: clamp(Math.round(50 + (match.homeScore - match.awayScore) * 12 + (matchSeed % 13) - 6), 15, 96)
+  };
+  match.stats.possession[1] = 100 - match.stats.possession[0];
+  match.events = buildTimeline(match);
+ };
+
+ const applyApiFixture = (fixture) => {
+  if (!fixture) return;
+
+  const apiHome = fixture?.homeTeam?.shortName || fixture?.homeTeam?.name || match.homeTeam.name;
+  const apiAway = fixture?.awayTeam?.shortName || fixture?.awayTeam?.name || match.awayTeam.name;
+  const apiStage = normalizeStage(String(fixture?.group || fixture?.stage || match.stage));
+  const apiScore = fixture?.score?.fullTime || {};
+  const apiStatusMap = {
+   FINISHED: 'FINISHED',
+   IN_PLAY: 'LIVE',
+   PAUSED: 'LIVE',
+   TIMED: 'SCHEDULED',
+   SCHEDULED: 'SCHEDULED'
+  };
+
+  match.id = String(fixture.id || match.id);
+  match.stage = apiStage;
+  match.date = formatDateForUi(fixture?.utcDate || match.date);
+  match.venue = fixture?.venue || venueMap[apiStage] || match.venue;
+  match.status = apiStatusMap[String(fixture?.status || '').toUpperCase()] || match.status;
+  match.homeScore = parseNumber(apiScore.home, match.homeScore);
+  match.awayScore = parseNumber(apiScore.away, match.awayScore);
+  match.homeTeam = { ...match.homeTeam, name: apiHome, code: teamCode(apiHome), manager: `${apiHome} Manager` };
+  match.awayTeam = { ...match.awayTeam, name: apiAway, code: teamCode(apiAway), manager: `${apiAway} Manager` };
+
+  const homeApiLineup = readApiLineup(fixture, 'home');
+  const awayApiLineup = readApiLineup(fixture, 'away');
+  if (homeApiLineup.length && awayApiLineup.length) {
+   match.hasLineupData = true;
+   match.homeLineup = mergeApiLineup(match.homeTeam.name, 'home', match.homeScore, match.awayScore, homeApiLineup);
+   match.awayLineup = mergeApiLineup(match.awayTeam.name, 'away', match.awayScore, match.homeScore, awayApiLineup);
+  }
+ };
+
+ const fetchApiFixture = async (matchId) => {
+  if (!apiToken) return null;
+  if (!/^\d+$/.test(String(matchId))) return null;
+  const endpoint = `${apiBase}/matches/${matchId}`;
+  const response = await fetch(endpoint, { headers: { 'X-Auth-Token': apiToken } });
+  if (!response.ok) throw new Error(`API request failed: ${response.status}`);
+  const payload = await response.json();
+  return payload?.match || payload;
+ };
+
+ const allPlayers = () => match.homeLineup.concat(match.awayLineup);
+ const playerShell = document.getElementById('selected-player-shell');
+ const pitch = document.getElementById('match-pitch');
+ const meridian = window.WC26Meridian;
+ const zoomLevels = ['overview', 'tactical', 'forensic'];
+ let viewState = meridian ? meridian.currentView() : { zoom: 'tactical', layers: { drawer: true, pitchSummary: true, playerChips: true, playerNames: true, scoreBanner: true } };
+ const layerPanel = document.getElementById('meridian-layer-panel');
+ const panelToggle = document.getElementById('meridian-panel-toggle');
+ const panelClose = document.getElementById('meridian-close-panel');
+ const zoomButton = document.getElementById('meridian-zoom-button');
+ const saveButton = document.getElementById('meridian-save-button');
+
+ const applyViewState = (nextView = viewState) => {
+  viewState = nextView;
+  if (meridian) meridian.applyView(document.body, viewState);
+  if (layerPanel) {
+   layerPanel.querySelectorAll('input[data-layer-toggle]').forEach((input) => {
+    const layerName = input.getAttribute('data-layer-toggle');
+    input.checked = viewState.layers[layerName] !== false;
+   });
+  }
+  if (zoomButton) {
+   zoomButton.textContent = viewState.zoom === 'overview' ? 'zoom_out' : viewState.zoom === 'forensic' ? 'center_focus_strong' : 'zoom_in';
+  }
+ };
+
+ const persistViewState = (patch) => {
+  const nextView = {
+   ...viewState,
+   ...patch,
+   layers: { ...viewState.layers, ...((patch && patch.layers) || {}) }
+  };
+  viewState = nextView;
+  if (meridian) meridian.setView(nextView);
+  applyViewState(nextView);
+ };
+
+ if (meridian) {
+  meridian.on('view', (payload) => {
+   if (payload && payload.detail) applyViewState(payload.detail);
+  });
+ }
+
+ applyViewState(viewState);
+
+ if (panelToggle && layerPanel) {
+  panelToggle.addEventListener('click', () => layerPanel.classList.toggle('hidden'));
+ }
+
+ if (panelClose && layerPanel) {
+  panelClose.addEventListener('click', () => layerPanel.classList.add('hidden'));
+ }
+
+ if (zoomButton) {
+  zoomButton.addEventListener('click', () => {
+   const currentIndex = zoomLevels.indexOf(viewState.zoom || 'tactical');
+   const nextZoom = zoomLevels[(currentIndex + 1) % zoomLevels.length];
+   persistViewState({ zoom: nextZoom });
+  });
+ }
+
+ if (saveButton) {
+  saveButton.addEventListener('click', () => {
+   const defaultName = `match-${String(match.id || 'view').slice(-6)}`;
+   const name = window.prompt('Save view as', defaultName);
+   if (!name) return;
+   if (meridian) meridian.saveView(name.trim(), viewState);
+  });
+ }
+
+ if (layerPanel) {
+  layerPanel.querySelectorAll('input[data-layer-toggle]').forEach((input) => {
+   input.addEventListener('change', () => {
+    const layerName = input.getAttribute('data-layer-toggle');
+    persistViewState({ layers: { [layerName]: input.checked } });
+   });
+  });
+ }
+
+ const renderPlayerPanel = (player, team) => {
+  if (!player || viewState.layers.drawer === false) {
+   playerShell.innerHTML = '';
+   playerShell.classList.add('hidden');
+   return;
+  }
+
+  playerShell.classList.remove('hidden');
+  playerShell.innerHTML = '<div class="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">Selected Player</div><div id="selected-player-panel" class="mt-4 space-y-3"></div>';
+  const freshPanel = document.getElementById('selected-player-panel');
+  if (!freshPanel) return;
+  freshPanel.innerHTML = `
+   <div class="flex items-center justify-between gap-3">
+    <div>
+     <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-on-surface-variant">${team.code}</div>
+     <div class="mt-1 font-headline text-2xl font-black uppercase tracking-tighter" style="color:${team.color}">${player.name}</div>
+    </div>
+    <div class="rounded-full border border-outline-variant/30 bg-surface-container-lowest px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-on-surface-variant">#${player.number}</div>
+   </div>
+   <div class="text-[10px] uppercase tracking-[0.18em] text-on-surface-variant">${player.position}</div>
+   <div class="grid grid-cols-2 gap-2">
+    ${[['Goals', player.stats.goals], ['Assists', player.stats.assists], ['Passes', player.stats.passes], ['Shots', player.stats.shots], ['Minutes', player.stats.minutes], ['Fouls', player.stats.fouls], ['Cards', player.stats.cards], ['Rating', player.stats.rating]].map(([label, value]) => `<div class="border border-outline-variant/20 bg-surface-container-lowest p-2"><div class="font-mono text-[9px] uppercase tracking-[0.16em] text-on-surface-variant">${label}</div><div class="mt-1 font-headline text-lg font-black ${label === 'Rating' ? 'text-primary' : 'text-on-surface'}">${value}</div></div>`).join('')}
+   </div>
+  `;
+ };
+
+ const renderPitch = () => {
+  const selectedId = window.__selectedPlayerId || null;
+  const markers = match.hasLineupData
+   ? allPlayers().map(({ side, player }) => {
+      const team = side === 'home' ? match.homeTeam : match.awayTeam;
+      const selected = selectedId === player.id;
+      return `
+       <button type="button" class="player-overlay ${selected ? 'ring-2 ring-primary ring-offset-2 ring-offset-transparent' : ''}" data-player-id="${player.id}" style="left:${player.x}%; top:${player.y}% ;">
+        <div class="player-ring" style="--player-ring-gradient: conic-gradient(${team.color} 0 46%, #5afcd2 46% 74%, #77e6ff 74% 89%, rgba(255,255,255,0.08) 0 100%); box-shadow:${selected ? '0 0 0 6px rgba(105, 246, 184, 0.18)' : 'none'};">
+         <span class="player-chip player-chip--top" data-wc26-layer="playerChips"><span class="material-symbols-outlined">schedule</span>${player.stats.minutes}</span>
+         <span class="player-chip player-chip--left" data-wc26-layer="playerChips"><span class="material-symbols-outlined">location_on</span>${player.position}</span>
+         <span class="player-chip player-chip--right" data-wc26-layer="playerChips">=${player.stats.passes}</span>
+         <span class="player-ring__core">${player.number}</span>
+         <span class="player-name-pill" data-wc26-layer="playerNames">${player.name}</span>
+        </div>
+       </button>
+      `;
+     }).join('')
+   : '<div class="absolute inset-0 flex items-center justify-center p-6 text-center text-[10px] font-mono uppercase tracking-[0.2em] text-white/90">Lineup data unavailable</div>';
+
+  pitch.innerHTML = `
+  <div class="match-pitch__summary" data-wc26-layer="pitchSummary">
+    <span>${match.venue}</span>
+    <span>${match.stats.totalGoals} GOALS // ${match.stats.winProbability}% HOME EDGE</span>
+   </div>
+   <svg class="match-pitch__svg" viewBox="0 0 105 68" preserveAspectRatio="none" aria-hidden="true">
+    <rect x="0" y="0" width="105" height="68" fill="#0d5c3c"></rect>
+    <rect x="0" y="0" width="105" height="68" fill="rgba(255,255,255,0.04)" opacity="0.55"></rect>
+    <rect x="1.25" y="1.25" width="102.5" height="65.5" fill="none" stroke="rgba(255,255,255,0.72)" stroke-width="0.7"></rect>
+    <line x1="52.5" y1="1.25" x2="52.5" y2="66.75" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"></line>
+    <circle cx="52.5" cy="34" r="9.15" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="0.55"></circle>
+    <circle cx="52.5" cy="34" r="0.55" fill="rgba(255,255,255,0.9)"></circle>
+    <!-- simple goal posts (left and right) -->
+    <g class="match-pitch__goals" stroke="rgba(255,255,255,0.9)" fill="none" stroke-width="0.7">
+     <!-- left goal (slightly inset from border) -->
+     <rect x="0.5" y="30" width="1.5" height="8" />
+     <!-- right goal -->
+     <rect x="103" y="30" width="1.5" height="8" />
+    </g>
+   </svg>
+   ${markers}
+  `;
+
+  pitch.querySelectorAll('button[data-player-id]').forEach((button) => {
+   button.addEventListener('click', () => {
+    const playerId = button.getAttribute('data-player-id');
+    const source = allPlayers().find(({ player }) => player.id === playerId);
+    if (!source) return;
+    window.__selectedPlayerId = source.player.id;
+    renderPlayerPanel(source.player, source.side === 'home' ? match.homeTeam : match.awayTeam);
+    renderPitch();
+   });
+  });
+ };
+
+ const init = async () => {
+  if (apiToken && rawMatchId) {
+   try {
+    const fixture = await fetchApiFixture(rawMatchId);
+    if (fixture) applyApiFixture(fixture);
+   } catch (error) {
+    console.error('Unable to fetch WC26 API match details. Falling back to URL data.', error);
+   }
+  }
+
+  rebuildDerivedData();
+  applyViewState(viewState);
+  setText('match-status-chip', match.status);
+  setText('match-stage-chip', match.stage);
+  setText('match-date-chip', match.date || 'DATE TBA');
+  setText('match-venue-chip', match.venue);
+  renderScoreBanner();
+  renderPlayerPanel(null, match.homeTeam);
+  window.__selectedPlayerId = null;
+  renderPitch();
+ };
+
+ if (!apiToken) {
+  console.info(`WC26 API token missing. Set localStorage.WC26_API_TOKEN to use ${apiBase}/competitions/${apiCompetition}/matches?season=${apiSeason}.`);
+ }
+
+ init();
+
+ function renderScoreBanner() {
+  const banner = document.getElementById('match-score-banner');
+  if (!banner) return;
+  banner.innerHTML = `
+   <div class="grid grid-cols-[minmax(3rem,auto)_auto_minmax(3rem,auto)] items-end gap-x-3 leading-none">
+    <div class="text-center">
+     <div class="font-headline text-4xl font-black tracking-tighter text-[#ff4d4d]">${match.homeScore}</div>
+     <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">${match.homeTeam.name}</div>
+    </div>
+    <div class="pb-4 font-headline text-3xl font-black tracking-tight text-[#ff4d4d]">:</div>
+    <div class="text-center">
+     <div class="font-headline text-4xl font-black tracking-tighter text-[#ff4d4d]">${match.awayScore}</div>
+     <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-on-surface-variant">${match.awayTeam.name}</div>
+    </div>
+   </div>
+  `;
+ }
+
+ function setText(id, value) {
+  const node = document.getElementById(id);
+  if (node) node.textContent = value;
+ }
+
+ function configureApiSettings() {
+  const currentBase = localStorage.getItem('WC26_API_BASE') || 'https://api.football-data.org/v4';
+  const currentToken = localStorage.getItem('WC26_API_TOKEN') || '';
+  const currentCompetition = localStorage.getItem('WC26_COMPETITION') || 'WC';
+  const currentSeason = localStorage.getItem('WC26_SEASON') || '2026';
+
+  const nextBase = window.prompt('API base URL', currentBase);
+  if (nextBase === null) return;
+  const nextToken = window.prompt('API token / bearer key', currentToken);
+  if (nextToken === null) return;
+  const nextCompetition = window.prompt('Competition code', currentCompetition);
+  if (nextCompetition === null) return;
+  const nextSeason = window.prompt('Season year', currentSeason);
+  if (nextSeason === null) return;
+
+  localStorage.setItem('WC26_API_BASE', nextBase.trim() || currentBase);
+  localStorage.setItem('WC26_API_TOKEN', nextToken.trim());
+  localStorage.setItem('WC26_COMPETITION', nextCompetition.trim() || currentCompetition);
+  localStorage.setItem('WC26_SEASON', String(Number(nextSeason) || 2026));
+  window.location.reload();
+ }
+
+ const settingsButton = document.getElementById('api-settings-button');
+ if (settingsButton) settingsButton.addEventListener('click', configureApiSettings);
+})();
+</script>
+</body>
+</html>

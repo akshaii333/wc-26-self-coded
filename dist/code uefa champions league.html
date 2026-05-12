@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>UEFA Champions League // TACTICAL_INTEL</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-dim": "#58e7ab",
+                      "surface-tint": "#69f6b8",
+                      "primary-fixed-dim": "#58e7ab",
+                      "surface-container-lowest": "#000000",
+                      "on-tertiary": "#005360",
+                      "inverse-on-surface": "#565554",
+                      "surface-container": "#1a1919",
+                      "primary-container": "#06b77f",
+                      "tertiary-container": "#00dcfd",
+                      "tertiary-fixed": "#00dcfd",
+                      "on-secondary-fixed": "#004939",
+                      "tertiary-fixed-dim": "#00cdeb",
+                      "secondary-container": "#006b56",
+                      "secondary-fixed-dim": "#47edc4",
+                      "inverse-primary": "#006d4a",
+                      "on-background": "#ffffff",
+                      "error-dim": "#d7383b",
+                      "on-primary-container": "#002919",
+                      "outline": "#777575",
+                      "surface-bright": "#2c2c2c",
+                      "on-secondary-fixed-variant": "#006853",
+                      "surface-container-highest": "#262626",
+                      "on-surface": "#ffffff",
+                      "surface-dim": "#0e0e0e",
+                      "surface-container-high": "#201f1f",
+                      "secondary-fixed": "#5afcd2",
+                      "on-tertiary-container": "#004955",
+                      "on-primary": "#005a3c",
+                      "primary-fixed": "#69f6b8",
+                      "on-primary-fixed-variant": "#006544",
+                      "inverse-surface": "#fcf8f8",
+                      "error-container": "#9f0519",
+                      "outline-variant": "#494847",
+                      "on-surface-variant": "#adaaaa",
+                      "tertiary": "#77e6ff",
+                      "background": "#0e0e0e",
+                      "on-error-container": "#ffa8a3",
+                      "on-primary-fixed": "#00452d",
+                      "surface-variant": "#262626",
+                      "on-tertiary-fixed-variant": "#005360",
+                      "on-tertiary-fixed": "#00343c",
+                      "error": "#ff716c",
+                      "on-secondary-container": "#defff2",
+                      "primary": "#69f6b8",
+                      "surface": "#0e0e0e",
+                      "surface-container-low": "#131313",
+                      "on-secondary": "#005d4a",
+                      "secondary-dim": "#47edc4",
+                      "tertiary-dim": "#00cdeb",
+                      "secondary": "#5afcd2",
+                      "on-error": "#490006"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "0px",
+                      "xl": "0px",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+    <script src="wc26-meridian-lite.js"></script>
+    <style>
+        body {
+            background-color: #0e0e0e;
+            background-image: 
+                linear-gradient(rgba(73, 72, 71, 0.05) 1px, transparent 1px),
+                linear-gradient(90px, rgba(73, 72, 71, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 2px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0e0e0e; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #494847; }
+        .loading-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .uccl-zoom-1 .uccl-compact {
+            transform: scale(0.98);
+            transform-origin: top center;
+        }
+        .uccl-zoom-2 .uccl-compact {
+            transform: scale(0.95);
+            transform-origin: top center;
+        }
+        .uccl-zoom-1 .uccl-tighten {
+            padding-top: 0.85rem;
+            padding-bottom: 0.85rem;
+        }
+        .uccl-zoom-2 .uccl-tighten {
+            padding-top: 0.7rem;
+            padding-bottom: 0.7rem;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface">
+    <!-- TopNavBar -->
+    <nav class="w-full px-6 py-4 bg-[#0e0e0e] border-b-0 flex justify-between items-center sticky top-0 z-50">
+        <div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">
+            TACTICAL_INTEL
+        </div>
+        <div class="hidden md:flex items-center space-x-8 font-space-grotesk tracking-tighter uppercase text-sm font-bold">
+            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
+            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a>
+            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
+            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
+            <a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative hidden sm:block">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
+                <input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
+            </div>
+            <div id="uccl-focus-chip" class="hidden md:flex items-center gap-2 px-3 py-1 border border-outline-variant/30 text-[10px] font-mono uppercase tracking-widest text-primary bg-surface-container">
+                UEFA_CL // SEASON_2025
+            </div>
+            <button id="uccl-zoom-button" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1 transition-colors" title="Zoom level">zoom_in</button>
+            <button id="uccl-panel-toggle" class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1 hover:text-[#69f6b8] transition-colors" title="Data layers">view_list</button>
+            <button id="uccl-save-button" class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1 hover:text-[#69f6b8] transition-colors" title="Save view">bookmark</button>
+            <span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">analytics</span>
+            <span class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1">terminal</span>
+            <span class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1">settings</span>
+        </div>
+    </nav>
+
+    <div id="uccl-layer-panel" class="hidden fixed top-20 right-6 bg-surface-container border border-outline-variant/30 rounded-none p-4 z-50 w-56 shadow-lg">
+        <h3 class="font-headline font-bold text-xs tracking-widest uppercase text-primary mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-primary"></span>
+            DATA_LAYERS
+        </h3>
+        <div class="space-y-3 font-mono text-[11px]">
+            <label class="flex items-center gap-3 cursor-pointer hover:text-primary transition-colors">
+                <input type="checkbox" class="uccl-layer-toggle" data-layer="hero" checked/>
+                <span>HERO</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer hover:text-primary transition-colors">
+                <input type="checkbox" class="uccl-layer-toggle" data-layer="liveMatches" checked/>
+                <span>LIVE_MATCHES</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer hover:text-primary transition-colors">
+                <input type="checkbox" class="uccl-layer-toggle" data-layer="upcomingFixtures" checked/>
+                <span>UPCOMING_FIXTURES</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer hover:text-primary transition-colors">
+                <input type="checkbox" class="uccl-layer-toggle" data-layer="standings" checked/>
+                <span>STANDINGS</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer hover:text-primary transition-colors">
+                <input type="checkbox" class="uccl-layer-toggle" data-layer="infoPanel" checked/>
+                <span>INFO_PANEL</span>
+            </label>
+        </div>
+    </div>
+
+    <main class="pt-24 pb-12 px-6 max-w-[1600px] mx-auto">
+        <!-- Hero Section -->
+        <section id="uccl-hero" class="mb-12" data-wc26-layer="hero">
+            <div class="relative group bg-surface-container overflow-hidden border border-outline-variant/30 p-12 uccl-compact">
+                <div class="absolute inset-0 z-0 grayscale opacity-20 group-hover:grayscale-0 transition-all duration-700">
+                    <div class="w-full h-full bg-gradient-to-br from-primary/10 to-transparent"></div>
+                </div>
+                <div class="relative z-20">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-2 h-2 bg-primary animate-pulse"></span>
+                        <span class="text-[10px] font-mono text-primary uppercase tracking-widest">LIVE FEED ACTIVE</span>
+                    </div>
+                    <h1 class="font-headline text-5xl md:text-7xl font-black text-on-surface tracking-tighter uppercase leading-none mb-6">
+                        UEFA<br/>
+                        <span class="text-primary">CHAMPIONS LEAGUE</span>
+                    </h1>
+                    <p class="text-on-surface-variant text-sm max-w-lg mb-8">Real-time match data, standings, and tactical insights powered by football-data.org. Monitor live scores, upcoming fixtures, and team performance metrics.</p>
+                    <div class="flex gap-4">
+                        <button class="bg-primary text-on-primary px-8 py-3 font-headline font-bold uppercase tracking-widest text-xs hover:bg-primary-container transition-colors" onclick="refreshData()">
+                            REFRESH_DATA
+                        </button>
+                        <button class="border border-outline px-8 py-3 font-headline font-bold uppercase tracking-widest text-xs hover:bg-surface-variant transition-colors" onclick="toggleStandings()">
+                            STANDINGS
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Matches Section -->
+        <section id="uccl-live-matches" class="mb-12" data-wc26-layer="liveMatches">
+            <div class="mb-6 border-b border-outline-variant/30 pb-4">
+                <h2 class="font-headline text-2xl font-black uppercase tracking-tighter flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-primary animate-pulse"></span>
+                    LIVE MATCHES
+                </h2>
+            </div>
+            <div id="liveMatches" class="grid grid-cols-1 md:grid-cols-2 gap-4 uccl-compact">
+                <div class="bg-surface-container border border-outline-variant/30 p-6 loading-pulse uccl-tighten">
+                    <div class="h-24 bg-surface-container-high animate-pulse rounded"></div>
+                </div>
+                <div class="bg-surface-container border border-outline-variant/30 p-6 loading-pulse uccl-tighten">
+                    <div class="h-24 bg-surface-container-high animate-pulse rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Fixtures -->
+        <section id="uccl-upcoming" class="mb-12" data-wc26-layer="upcomingFixtures">
+            <div class="mb-6 border-b border-outline-variant/30 pb-4">
+                <h2 class="font-headline text-2xl font-black uppercase tracking-tighter flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">schedule</span>
+                    UPCOMING FIXTURES
+                </h2>
+            </div>
+            <div id="upcomingFixtures" class="space-y-2 uccl-compact">
+                <div class="bg-surface-container border border-outline-variant/30 p-4 loading-pulse uccl-tighten">
+                    <div class="h-16 bg-surface-container-high animate-pulse rounded"></div>
+                </div>
+                <div class="bg-surface-container border border-outline-variant/30 p-4 loading-pulse uccl-tighten">
+                    <div class="h-16 bg-surface-container-high animate-pulse rounded"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Standings Section -->
+        <section id="standingsSection" class="mb-12 hidden" data-wc26-layer="standings">
+            <div class="mb-6 border-b border-outline-variant/30 pb-4">
+                <h2 class="font-headline text-2xl font-black uppercase tracking-tighter">TOURNAMENT STANDINGS</h2>
+            </div>
+            <div id="standings" class="bg-surface-container border border-outline-variant/30 overflow-hidden uccl-compact">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-surface-container-high border-b border-outline-variant/30">
+                            <tr class="text-on-surface-variant text-[10px] uppercase font-bold">
+                                <th class="p-4 text-left">POSITION</th>
+                                <th class="p-4 text-left">TEAM</th>
+                                <th class="p-4 text-center">MP</th>
+                                <th class="p-4 text-center">W</th>
+                                <th class="p-4 text-center">D</th>
+                                <th class="p-4 text-center">L</th>
+                                <th class="p-4 text-right">GD</th>
+                                <th class="p-4 text-right">PTS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standingsBody" class="divide-y divide-outline-variant/20">
+                            <tr class="hover:bg-surface-container-high transition-colors">
+                                <td class="p-4" colspan="8">
+                                    <div class="h-6 bg-surface-container-highest animate-pulse rounded"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Scorers Widget -->
+        <section id="uccl-info-panel" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12" data-wc26-layer="infoPanel">
+            <div class="bg-surface-container border border-outline-variant/30 p-6 uccl-compact">
+                <h3 class="font-headline font-bold text-xs tracking-widest uppercase text-primary mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">trending_up</span>
+                    RECENT MATCHES
+                </h3>
+                <div id="topScorers" class="space-y-3">
+                    <div class="flex justify-between items-center p-3 bg-surface-container-high animate-pulse rounded">
+                        <div class="h-4 bg-surface-container-lowest w-2/3 rounded"></div>
+                        <div class="h-4 bg-surface-container-lowest w-1/6 rounded"></div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-surface-container-high animate-pulse rounded">
+                        <div class="h-4 bg-surface-container-lowest w-2/3 rounded"></div>
+                        <div class="h-4 bg-surface-container-lowest w-1/6 rounded"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-surface-container border border-outline-variant/30 p-6 uccl-compact">
+                <h3 class="font-headline font-bold text-xs tracking-widest uppercase text-primary mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">shield_admin</span>
+                    API STATUS
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-widest text-on-surface-variant">DATA SOURCE</span>
+                        <span class="text-xs font-mono text-primary">FOOTBALL-DATA.ORG</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-widest text-on-surface-variant">LAST REFRESH</span>
+                        <span id="lastRefresh" class="text-xs font-mono text-on-surface">--:--:--</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-widest text-on-surface-variant">REQUESTS TODAY</span>
+                        <span id="requestCount" class="text-xs font-mono text-on-surface">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-widest text-on-surface-variant">API KEY</span>
+                        <span id="apiKeyDisplay" class="text-xs font-mono text-primary">--</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs uppercase tracking-widest text-on-surface-variant">API ERROR</span>
+                        <span id="apiError" class="text-xs font-mono text-error">—</span>
+                    </div>
+                    <div class="border-t border-outline-variant/20 pt-4">
+                        <div class="text-[10px] text-on-surface-variant leading-relaxed">
+                            <p class="mb-2"><strong>NOTE:</strong> Register at <a href="https://www.football-data.org/client/register" target="_blank" class="text-primary hover:underline">football-data.org</a> for your API key</p>
+                            <p><strong>Free Tier:</strong> 10 requests/minute, full season data available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full px-6 py-2 bg-[#0e0e0e] border-t border-[#494847]/30 flex flex-col md:flex-row justify-between items-center opacity-90">
+        <div class="font-mono text-[10px] uppercase tracking-widest text-[#adaaaa] mb-2 md:mb-0">
+            SYSTEM STATUS: <span class="text-primary">OPERATIONAL</span> // DATA SOURCE: FOOTBALL-DATA.ORG
+        </div>
+        <div class="flex space-x-6 font-mono text-[10px] uppercase tracking-widest">
+            <span class="text-[#adaaaa] hover:text-[#ffffff] cursor-help">LATENCY: <span id="latency">--</span>MS</span>
+            <span class="text-[#69f6b8] flex items-center gap-1">
+                <span class="material-symbols-outlined text-[12px]">lock</span>ENCRYPTED FEED ACTIVE
+            </span>
+        </div>
+    </footer>
+
+    <script>
+        const meridian = window.WC26Meridian;
+        const zoomButton = document.getElementById('uccl-zoom-button');
+        const panelToggle = document.getElementById('uccl-panel-toggle');
+        const saveButton = document.getElementById('uccl-save-button');
+        const layerPanel = document.getElementById('uccl-layer-panel');
+        const focusChip = document.getElementById('uccl-focus-chip');
+        const layerToggles = document.querySelectorAll('.uccl-layer-toggle');
+        const sectionMap = {
+            hero: ['#uccl-hero'],
+            liveMatches: ['#uccl-live-matches'],
+            upcomingFixtures: ['#uccl-upcoming'],
+            standings: ['#standingsSection'],
+            infoPanel: ['#uccl-info-panel']
+        };
+
+        function getViewState() {
+            return meridian?.getViewState ? meridian.getViewState() : { zoom: 0, layers: {} };
+        }
+
+        function applyViewState(nextView) {
+            const zoom = Number(nextView?.zoom) || 0;
+            document.body.classList.remove('uccl-zoom-1', 'uccl-zoom-2');
+            if (zoom > 0) {
+                document.body.classList.add(`uccl-zoom-${zoom}`);
+            }
+
+            layerToggles.forEach((toggle) => {
+                const layer = toggle.dataset.layer;
+                const visible = nextView?.layers?.[layer] !== false;
+                toggle.checked = visible;
+                (sectionMap[layer] || []).forEach((selector) => {
+                    document.querySelectorAll(selector).forEach((node) => {
+                        node.style.display = visible ? '' : 'none';
+                    });
+                });
+            });
+        }
+
+        function syncFocusChip() {
+            const focusMatch = meridian?.getFocusMatch ? meridian.getFocusMatch() : null;
+            const focusTeam = meridian?.getFocusTeam ? meridian.getFocusTeam() : null;
+            if (focusMatch || focusTeam) {
+                const focusText = focusMatch
+                    ? `${focusMatch.home || 'TBD'} vs ${focusMatch.away || 'TBD'}${focusMatch.stage ? ` // ${focusMatch.stage}` : ''}`
+                    : `${focusTeam?.competition || 'UEFA_CL'}${focusTeam?.season ? ` // SEASON_${focusTeam.season}` : ''}`;
+                if (focusChip) {
+                    focusChip.textContent = focusText.replace(/\s+/g, ' ').trim();
+                }
+                document.title = focusText.startsWith('UEFA Champions League //')
+                    ? focusText
+                    : `UEFA Champions League // ${focusText}`;
+            } else if (focusChip) {
+                focusChip.textContent = 'UEFA_CL // SEASON_2025';
+            }
+        }
+
+        const initialState = getViewState();
+        applyViewState(initialState);
+        syncFocusChip();
+
+        zoomButton?.addEventListener('click', () => {
+            const nextView = JSON.parse(JSON.stringify(getViewState()));
+            nextView.zoom = ((Number(nextView.zoom) || 0) + 1) % 3;
+            meridian?.setViewState?.(nextView);
+            applyViewState(nextView);
+        });
+
+        panelToggle?.addEventListener('click', () => {
+            layerPanel?.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!layerPanel?.contains(event.target) && !panelToggle?.contains(event.target)) {
+                layerPanel?.classList.add('hidden');
+            }
+        });
+
+        layerToggles.forEach((toggle) => {
+            toggle.addEventListener('change', () => {
+                const nextView = getViewState();
+                nextView.layers[toggle.dataset.layer] = toggle.checked;
+                meridian?.setViewState?.(nextView);
+                applyViewState(nextView);
+            });
+        });
+
+        saveButton?.addEventListener('click', () => {
+            meridian?.saveState?.();
+            saveButton.style.color = '#69f6b8';
+            setTimeout(() => {
+                saveButton.style.color = '#adaaaa';
+            }, 1000);
+        });
+
+        meridian?.on?.('view', ({ detail }) => {
+            applyViewState(detail);
+        });
+
+        meridian?.on?.('focus-match', () => syncFocusChip());
+        meridian?.on?.('focus-team', () => syncFocusChip());
+
+        window.addEventListener('wc26-view-change', (event) => {
+            applyViewState(event.detail || getViewState());
+        });
+
+        window.addEventListener('wc26-focus-change', () => {
+            syncFocusChip();
+        });
+
+        // Configuration - football-data.org
+        // Embedded key provided by user; page prefers stored token `WC26_API_TOKEN` if present.
+        const EMBEDDED_KEY = 'c195099010824ca28d43d228d541ffba';
+        const API_KEY = localStorage.getItem('WC26_API_TOKEN') || EMBEDDED_KEY; // stored token wins
+        if (!localStorage.getItem('WC26_API_TOKEN')) {
+            try { localStorage.setItem('WC26_API_TOKEN', EMBEDDED_KEY); } catch(e) { /* ignore */ }
+        }
+        const API_BASE = 'https://api.football-data.org/v4';
+        const PROXY_BASE = '/api';
+        const COMPETITION_ID = 'CL'; // UEFA Champions League
+        // Set season to the year the season starts: e.g. 2025 => 2025/26 season, 2026 => 2026/27
+        const SEASON = 2025; // change to 2026 if you want 2026/27
+
+        let requestCount = 0;
+        let recentMatchesCache = [];
+        const FALLBACK_DATA = {
+            live: [],
+            recent: [
+                { utcDate: '2026-05-06T19:00:00Z', status: 'FINISHED', homeTeam: { name: 'FC Bayern Munchen' }, awayTeam: { name: 'Paris Saint-Germain FC' }, score: { fullTime: { home: 1, away: 1 } } },
+                { utcDate: '2026-05-05T19:00:00Z', status: 'FINISHED', homeTeam: { name: 'Arsenal FC' }, awayTeam: { name: 'Club Atletico de Madrid' }, score: { fullTime: { home: 1, away: 0 } } },
+                { utcDate: '2026-04-29T19:00:00Z', status: 'FINISHED', homeTeam: { name: 'Club Atletico de Madrid' }, awayTeam: { name: 'Arsenal FC' }, score: { fullTime: { home: 1, away: 1 } } },
+                { utcDate: '2026-04-28T19:00:00Z', status: 'FINISHED', homeTeam: { name: 'Paris Saint-Germain FC' }, awayTeam: { name: 'FC Bayern Munchen' }, score: { fullTime: { home: 5, away: 4 } } }
+            ],
+            upcoming: [
+                { utcDate: '2026-05-30T19:00:00Z', status: 'TIMED', homeTeam: { name: 'Arsenal FC' }, awayTeam: { name: 'Paris Saint-Germain FC' } }
+            ],
+            standings: [{
+                table: [
+                    { position: 1, team: { name: 'Arsenal FC', crest: '' }, playedGames: 8, won: 8, draw: 0, lost: 0, goalDifference: 19, points: 24 },
+                    { position: 2, team: { name: 'FC Bayern Munchen', crest: '' }, playedGames: 8, won: 7, draw: 0, lost: 1, goalDifference: 14, points: 21 },
+                    { position: 3, team: { name: 'Liverpool FC', crest: '' }, playedGames: 8, won: 6, draw: 0, lost: 2, goalDifference: 12, points: 18 },
+                    { position: 4, team: { name: 'Tottenham Hotspur FC', crest: '' }, playedGames: 8, won: 5, draw: 2, lost: 1, goalDifference: 10, points: 17 }
+                ]
+            }],
+            teams: [
+                { name: 'Arsenal FC', area: { name: 'England' }, crest: '' },
+                { name: 'FC Bayern Munchen', area: { name: 'Germany' }, crest: '' },
+                { name: 'Paris Saint-Germain FC', area: { name: 'France' }, crest: '' },
+                { name: 'Real Madrid CF', area: { name: 'Spain' }, crest: '' },
+                { name: 'FC Barcelona', area: { name: 'Spain' }, crest: '' }
+            ]
+        };
+
+        // Helper for API requests with error reporting
+        async function apiFetch(path) {
+            const urls = [`${PROXY_BASE}${path}`];
+            let lastError = null;
+
+            for (const url of urls) {
+                try {
+                    const headers = url.startsWith(PROXY_BASE)
+                        ? {}
+                        : { 'X-Auth-Token': API_KEY };
+                    const res = await fetch(url, { headers, mode: 'cors' });
+                    if (!res.ok) {
+                        const txt = await res.text().catch(() => res.statusText || 'unknown');
+                        lastError = new Error(`HTTP ${res.status}: ${txt}`);
+                        continue;
+                    }
+                    document.getElementById('apiError').textContent = '—';
+                    return await res.json();
+                } catch (error) {
+                    lastError = error;
+                }
+            }
+
+            const msg = lastError ? (lastError.message || String(lastError)) : 'Unknown request failure';
+            document.getElementById('apiError').textContent = msg;
+            throw new Error(msg);
+        }
+
+        // Main function to fetch and display data
+        async function fetchChampionsLeagueData() {
+            const startTime = performance.now();
+            try {
+                // show API key masked
+                const keyDisplay = API_KEY ? (API_KEY.length > 6 ? API_KEY.slice(0,4) + '…' + API_KEY.slice(-4) : API_KEY) : '--';
+                document.getElementById('apiKeyDisplay').textContent = keyDisplay;
+
+                document.getElementById('apiError').textContent = '—';
+
+                const recentData = await apiFetch(`/competitions/${COMPETITION_ID}/matches?status=FINISHED&season=${SEASON}`);
+                requestCount++;
+                recentMatchesCache = recentData.matches || [];
+                displayRecentMatches(recentData.matches || []);
+
+                // Fetch live matches
+                const liveData = await apiFetch(`/competitions/${COMPETITION_ID}/matches?status=LIVE&season=${SEASON}`);
+                requestCount++;
+                displayLiveMatches(liveData.matches || []);
+
+                // Fetch upcoming matches
+                const upcomingData = await apiFetch(`/competitions/${COMPETITION_ID}/matches?status=SCHEDULED&season=${SEASON}`);
+                requestCount++;
+                displayUpcomingFixtures(upcomingData.matches || []);
+
+                // Fetch standings
+                const standingsData = await apiFetch(`/competitions/${COMPETITION_ID}/standings?season=${SEASON}`);
+                requestCount++;
+                displayStandings(standingsData.standings || []);
+
+                // Fetch teams (used as fallback for scorers display)
+                const teamsData = await apiFetch(`/competitions/${COMPETITION_ID}/teams?season=${SEASON}`);
+                requestCount++;
+                displayTopScorers(teamsData.teams || []);
+
+                updateTimestamp();
+                const endTime = performance.now();
+                document.getElementById('latency').textContent = Math.round(endTime - startTime);
+            } catch (error) {
+                recentMatchesCache = FALLBACK_DATA.recent;
+                displayLiveMatches(FALLBACK_DATA.live);
+                displayRecentMatches(FALLBACK_DATA.recent);
+                displayUpcomingFixtures(FALLBACK_DATA.upcoming);
+                displayStandings(FALLBACK_DATA.standings);
+                displayTopScorers(FALLBACK_DATA.teams);
+                updateTimestamp();
+                document.getElementById('apiError').textContent = 'Cached data mode';
+            }
+        }
+
+        function displayLiveMatches(matches) {
+            const container = document.getElementById('liveMatches');
+            const fallbackRecent = recentMatchesCache.slice(0, 4);
+            
+            if (matches.length === 0) {
+                if (fallbackRecent.length > 0) {
+                    container.innerHTML = fallbackRecent.map(match => `
+                        <div class="bg-surface-container border border-outline-variant/30 p-6 hover:border-primary transition-colors">
+                            <div class="text-[10px] font-mono text-primary mb-3 uppercase">RECENT FINAL</div>
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="text-center flex-1">
+                                    <div class="font-bold text-sm mb-1">${match.homeTeam?.name || 'TBD'}</div>
+                                    <div class="text-2xl font-headline font-black">${match.score?.fullTime?.home ?? '-'}</div>
+                                </div>
+                                <div class="text-on-surface-variant text-xs px-4">FT</div>
+                                <div class="text-center flex-1">
+                                    <div class="font-bold text-sm mb-1">${match.awayTeam?.name || 'TBD'}</div>
+                                    <div class="text-2xl font-headline font-black">${match.score?.fullTime?.away ?? '-'}</div>
+                                </div>
+                            </div>
+                            <div class="text-[10px] text-on-surface-variant text-center uppercase">${new Date(match.utcDate).toLocaleString()}</div>
+                        </div>
+                    `).join('');
+                    return;
+                }
+                container.innerHTML = `
+                    <div class="col-span-full bg-surface-container border border-outline-variant/30 p-8 text-center">
+                        <p class="text-on-surface-variant text-sm">No live matches at the moment</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = matches.slice(0, 4).map(match => `
+                <div class="bg-surface-container border border-outline-variant/30 p-6 hover:border-primary transition-colors">
+                    <div class="text-[10px] font-mono text-primary mb-3 uppercase">${match.status}</div>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-center flex-1">
+                            <div class="font-bold text-sm mb-1">${match.homeTeam.name}</div>
+                            <div class="text-2xl font-headline font-black">${match.score.fullTime.home !== null ? match.score.fullTime.home : '-'}</div>
+                        </div>
+                        <div class="text-on-surface-variant text-xs px-4">
+                            ${match.status === 'LIVE' ? 'LIVE' : match.status}
+                        </div>
+                        <div class="text-center flex-1">
+                            <div class="font-bold text-sm mb-1">${match.awayTeam.name}</div>
+                            <div class="text-2xl font-headline font-black">${match.score.fullTime.away !== null ? match.score.fullTime.away : '-'}</div>
+                        </div>
+                    </div>
+                    <div class="text-[10px] text-on-surface-variant text-center uppercase">${new Date(match.utcDate).toLocaleString()}</div>
+                </div>
+            `).join('');
+        }
+
+        function displayUpcomingFixtures(fixtures) {
+            const container = document.getElementById('upcomingFixtures');
+            
+            if (fixtures.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-surface-container border border-outline-variant/30 p-8 text-center">
+                        <p class="text-on-surface-variant text-sm">No upcoming matches</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = fixtures.slice(0, 6).map(match => `
+                <div class="bg-surface-container border border-outline-variant/30 p-4 hover:border-primary transition-colors flex justify-between items-center">
+                    <div class="flex-1">
+                        <div class="text-xs text-on-surface-variant mb-1">${new Date(match.utcDate).toLocaleString()}</div>
+                        <div class="text-sm font-bold">${match.homeTeam?.name || 'TBD'} vs ${match.awayTeam?.name || 'TBD'}</div>
+                    </div>
+                    <div class="text-[10px] font-mono text-primary uppercase ml-4">${match.status}</div>
+                </div>
+            `).join('');
+        }
+
+        function displayRecentMatches(matches) {
+            const container = document.getElementById('topScorers');
+
+            if (matches.length === 0) {
+                return;
+            }
+
+            container.innerHTML = matches.slice(0, 5).map(match => `
+                <div class="flex justify-between items-center p-3 bg-surface-container-high rounded border border-outline-variant/20">
+                    <div class="flex items-center gap-2 flex-1 min-w-0">
+                        <div class="w-2 h-2 rounded-full bg-primary"></div>
+                        <div class="min-w-0">
+                            <div class="text-xs font-bold truncate">${match.homeTeam.name} vs ${match.awayTeam.name}</div>
+                            <div class="text-[10px] text-on-surface-variant">${new Date(match.utcDate).toLocaleDateString()} · ${match.score.fullTime.home ?? 0}-${match.score.fullTime.away ?? 0}</div>
+                        </div>
+                    </div>
+                    <div class="text-[10px] font-mono text-primary uppercase">${match.status}</div>
+                </div>
+            `).join('');
+        }
+
+        function displayStandings(standings) {
+            if (!standings || standings.length === 0) return;
+            
+            const table = standings[0]?.table || [];
+            const tbody = document.getElementById('standingsBody');
+            
+            tbody.innerHTML = table.map((entry, idx) => `
+                <tr class="hover:bg-surface-container-high transition-colors">
+                    <td class="p-4 text-primary font-bold">${entry.position}</td>
+                    <td class="p-4">
+                        <div class="flex items-center gap-3">
+                            <img src="${entry.team.crest}" alt="${entry.team.name}" class="w-6 h-6 object-contain" onerror="this.style.display='none'" />
+                            <span class="text-sm">${entry.team.name}</span>
+                        </div>
+                    </td>
+                    <td class="p-4 text-center text-on-surface-variant">${entry.playedGames}</td>
+                    <td class="p-4 text-center text-primary font-bold">${entry.won}</td>
+                    <td class="p-4 text-center text-on-surface-variant">${entry.draw}</td>
+                    <td class="p-4 text-center text-error">${entry.lost}</td>
+                    <td class="p-4 text-right text-on-surface-variant">${entry.goalDifference}</td>
+                    <td class="p-4 text-right font-bold text-primary text-lg">${entry.points}</td>
+                </tr>
+            `).join('');
+        }
+
+        function displayTopScorers(teams) {
+            const container = document.getElementById('topScorers');
+            
+            if (teams.length === 0) {
+                container.innerHTML = '<p class="text-on-surface-variant text-xs">No scorer data available</p>';
+                return;
+            }
+
+            // Display top teams for now as football-data.org has limited free player data
+            container.innerHTML = teams.slice(0, 5).map(team => `
+                <div class="flex justify-between items-center p-3 bg-surface-container-high rounded border border-outline-variant/20">
+                    <div class="flex items-center gap-2 flex-1">
+                        <img src="${team.crest}" alt="${team.name}" class="w-8 h-8 rounded object-contain" onerror="this.style.display='none'" />
+                        <div>
+                            <div class="text-xs font-bold">${team.name}</div>
+                            <div class="text-[10px] text-on-surface-variant">${team.area?.name || 'UEFA'}</div>
+                        </div>
+                    </div>
+                    <div class="text-sm font-headline font-black text-primary">★</div>
+                </div>
+            `).join('');
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('lastRefresh').textContent = now.toLocaleTimeString();
+            document.getElementById('requestCount').textContent = requestCount;
+        }
+
+        function toggleStandings() {
+            const section = document.getElementById('standingsSection');
+            section.classList.toggle('hidden');
+        }
+
+        function refreshData() {
+            document.getElementById('liveMatches').innerHTML = '<div class="col-span-full text-center text-on-surface-variant">Refreshing...</div>';
+            fetchChampionsLeagueData();
+            meridian?.focusTeam?.({ competition: 'UEFA Champions League', season: SEASON });
+        }
+
+        function showDemo() {
+            // Show demo data if API key not configured
+            document.getElementById('liveMatches').innerHTML = `
+                <div class="col-span-full bg-surface-container-high border border-error/50 p-8 rounded">
+                    <div class="text-center">
+                        <span class="text-error text-sm font-bold uppercase mb-4 block">⚠ DATA SOURCE UNAVAILABLE</span>
+                        <p class="text-on-surface-variant text-sm mb-6">
+                            If you are running locally, start the proxy or use a hosted deployment with the /api route enabled:
+                        </p>
+                        <ol class="text-left text-sm text-on-surface-variant space-y-2 max-w-md mx-auto mb-6">
+                            <li>1. Start the local proxy: <code class="bg-surface-container px-2 py-1 text-primary">node proxy-server.js</code></li>
+                            <li>2. Or deploy to Vercel so the <code class="bg-surface-container px-2 py-1 text-primary">/api</code> route is served automatically</li>
+                            <li>3. If needed, set <code class="bg-surface-container px-2 py-1 text-primary">FOOTBALL_DATA_KEY</code> to your token</li>
+                        </ol>
+                        <button onclick="location.reload()" class="bg-primary text-on-primary px-6 py-2 text-xs font-bold uppercase hover:bg-primary-container transition-colors">
+                            Retry
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('apiKeyDisplay').textContent = API_KEY ? `${API_KEY.slice(0, 4)}…${API_KEY.slice(-4)}` : '--';
+            meridian?.focusTeam?.({ competition: 'UEFA Champions League', season: SEASON });
+            fetchChampionsLeagueData();
+            // Refresh every 60 seconds
+            setInterval(fetchChampionsLeagueData, 60000);
+        });
+    </script>
+</body>
+</html>
