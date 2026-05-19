@@ -95,27 +95,56 @@
         body[data-wc26-zoom='overview'] .mono-data { letter-spacing: 0; }
         body[data-wc26-zoom='overview'] #heatmap-surface { opacity: 0.14; }
         body[data-wc26-zoom='forensic'] #heatmap-surface { opacity: 0.3; }
+        .wc26-nav-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #9a9a9a;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: color 180ms ease, background-color 180ms ease, box-shadow 220ms ease, transform 180ms ease, filter 220ms ease, border-color 180ms ease;
+        }
+        .wc26-nav-icon:hover {
+            color: #d0d0d0;
+            transform: scale(1.04);
+        }
+        .wc26-nav-icon:active {
+            transform: scale(1.01);
+        }
+        .wc26-nav-icon-active {
+            color: #ecfff8;
+            background: rgba(89, 255, 198, 0.1);
+            border-color: rgba(89, 255, 198, 0.45);
+            box-shadow: 0 0 0 1px rgba(89, 255, 198, 0.12) inset, 0 0 12px rgba(89, 255, 198, 0.3), 0 0 22px rgba(89, 255, 198, 0.16);
+            filter: drop-shadow(0 0 8px rgba(89, 255, 198, 0.34));
+        }
+        .wc26-nav-icon-active:hover {
+            color: #ffffff;
+            background: rgba(89, 255, 198, 0.14);
+            transform: scale(1.08);
+        }
+        .wc26-nav-icon-active:active {
+            transform: scale(1.04);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 <!-- TopAppBar -->
 <nav class="flex justify-between items-center w-full px-6 py-4 bg-[#0e0e0e] border-b border-[#494847]/30 sticky top-0 z-50">
-<div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">TACTICAL_INTEL_V1</div>
+<div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">TACTICAL_INTEL</div>
 <div class="hidden md:flex items-center space-x-8">
 <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
 <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a>
-<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20match%20detail.html">MATCH DETAIL</a>
-<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
+
 <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20performance index.html">PERFORMANCE INDEX</a>
 <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20about.html">ABOUT</a>
 </div>
 <div class="flex items-center space-x-4">
-<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">analytics</span>
-<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">terminal</span>
-<button id="performance-zoom-button" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1" title="Cycle semantic zoom">zoom_in</button>
-<button id="performance-panel-toggle" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1" title="Toggle data layers">view_list</button>
-<button id="performance-save-button" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1" title="Save current view">bookmark</button>
-<span id="api-settings-button" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">settings</span>
+    
+<button id="performance-panel-toggle" class="material-symbols-outlined wc26-nav-icon wc26-nav-icon-active cursor-pointer" title="Customize" aria-label="Customize">tune</button>
 </div>
 </nav>
 <main class="flex-grow p-6 space-y-6">

@@ -93,6 +93,39 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
+        .wc26-nav-icon {
+          width: 2.25rem;
+          height: 2.25rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #9a9a9a;
+          background: transparent;
+          border: 1px solid transparent;
+          transition: color 180ms ease, background-color 180ms ease, box-shadow 220ms ease, transform 180ms ease, filter 220ms ease, border-color 180ms ease;
+        }
+        .wc26-nav-icon:hover {
+          color: #d0d0d0;
+          transform: scale(1.04);
+        }
+        .wc26-nav-icon:active {
+          transform: scale(1.01);
+        }
+        .wc26-nav-icon-active {
+          color: #ecfff8;
+          background: rgba(89, 255, 198, 0.1);
+          border-color: rgba(89, 255, 198, 0.45);
+          box-shadow: 0 0 0 1px rgba(89, 255, 198, 0.12) inset, 0 0 12px rgba(89, 255, 198, 0.3), 0 0 22px rgba(89, 255, 198, 0.16);
+          filter: drop-shadow(0 0 8px rgba(89, 255, 198, 0.34));
+        }
+        .wc26-nav-icon-active:hover {
+          color: #ffffff;
+          background: rgba(89, 255, 198, 0.14);
+          transform: scale(1.08);
+        }
+        .wc26-nav-icon-active:active {
+          transform: scale(1.04);
+        }
         .custom-scrollbar::-webkit-scrollbar { width: 2px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #0e0e0e; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #494847; }
@@ -105,18 +138,11 @@
 <div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">
             TACTICAL_INTEL
         </div>
-<div class="hidden md:flex items-center space-x-8 font-space-grotesk tracking-tighter uppercase text-sm font-bold"><a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20homepage.html">HOME</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20match%20detail.html">MATCH DETAIL</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a></div>
+<div class="hidden md:flex items-center space-x-8 font-space-grotesk tracking-tighter uppercase text-sm font-bold"><a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20homepage.html">HOME</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a><a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20about.html">ABOUT</a></div>
 <div class="flex items-center space-x-4">
-<div class="relative hidden sm:block">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
-<input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
-</div>
-<button id="homepage-zoom-button" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1 transition-colors" title="Zoom level">zoom_in</button>
-<button id="homepage-panel-toggle" class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1 hover:text-[#69f6b8] transition-colors" title="Data layers">view_list</button>
-<button id="homepage-save-button" class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1 hover:text-[#69f6b8] transition-colors" title="Save view">bookmark</button>
-<span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">analytics</span>
-<span class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1">terminal</span>
-<span class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1">settings</span>
+      
+      <button id="homepage-panel-toggle" class="material-symbols-outlined wc26-nav-icon wc26-nav-icon-active cursor-pointer" title="Customize" aria-label="Customize">tune</button>
+      
 </div>
 </nav>
 <!-- Meridian Layer Panel -->

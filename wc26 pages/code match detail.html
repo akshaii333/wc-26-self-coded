@@ -277,6 +277,39 @@
  body[data-wc26-zoom='forensic'] .player-ring {
   box-shadow: 0 0 0 1px rgba(105, 246, 184, 0.16), 0 0 24px rgba(105, 246, 184, 0.08);
  }
+ .wc26-nav-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9a9a9a;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: color 180ms ease, background-color 180ms ease, box-shadow 220ms ease, transform 180ms ease, filter 220ms ease, border-color 180ms ease;
+ }
+ .wc26-nav-icon:hover {
+  color: #d0d0d0;
+  transform: scale(1.04);
+ }
+ .wc26-nav-icon:active {
+  transform: scale(1.01);
+ }
+ .wc26-nav-icon-active {
+  color: #ecfff8;
+  background: rgba(89, 255, 198, 0.1);
+  border-color: rgba(89, 255, 198, 0.45);
+  box-shadow: 0 0 0 1px rgba(89, 255, 198, 0.12) inset, 0 0 12px rgba(89, 255, 198, 0.3), 0 0 22px rgba(89, 255, 198, 0.16);
+  filter: drop-shadow(0 0 8px rgba(89, 255, 198, 0.34));
+ }
+ .wc26-nav-icon-active:hover {
+  color: #ffffff;
+  background: rgba(89, 255, 198, 0.14);
+  transform: scale(1.08);
+ }
+ .wc26-nav-icon-active:active {
+  transform: scale(1.04);
+ }
 </style>
 </head>
 <body class="font-body text-on-surface overflow-hidden h-screen">
@@ -293,24 +326,16 @@
   </div>
   <div class="hidden md:flex items-center gap-8">
    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
-   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20system archive.html">MATCHES</a>
    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20match%20detail.html">MATCH DETAIL</a>
-   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+   <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20about.html">ABOUT</a>
   </div>
   <div class="flex items-center gap-3">
-   <div class="relative hidden lg:block">
-    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
-    <input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
-   </div>
+   
    <div class="flex gap-2">
-    <button id="meridian-zoom-button" class="material-symbols-outlined text-on-surface-variant hover:text-primary" title="Cycle semantic zoom">zoom_in</button>
-    <button id="meridian-panel-toggle" class="material-symbols-outlined text-on-surface-variant hover:text-primary" title="Toggle data layers">view_list</button>
-    <button id="meridian-save-button" class="material-symbols-outlined text-on-surface-variant hover:text-primary" title="Save current view">bookmark</button>
-    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary">analytics</button>
-    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary">terminal</button>
-    <button id="api-settings-button" class="material-symbols-outlined text-on-surface-variant hover:text-primary">settings</button>
+    <button id="meridian-panel-toggle" class="material-symbols-outlined wc26-nav-icon wc26-nav-icon-active" title="Customize" aria-label="Customize">tune</button>
    </div>
   </div>
  </div>
@@ -369,10 +394,11 @@
  const rawScore = params.get('score') || '0 : 0';
  const intensity = params.get('intensity') || 'Balanced';
  const hasLineupData = params.get('lineups') !== 'none';
- const apiBase = params.get('apiBase') || localStorage.getItem('WC26_API_BASE') || 'https://api.football-data.org/v4';
- const apiToken = params.get('apiToken') || localStorage.getItem('WC26_API_TOKEN') || '';
- const apiCompetition = params.get('competition') || localStorage.getItem('WC26_COMPETITION') || 'WC';
- const apiSeason = Number(params.get('season') || localStorage.getItem('WC26_SEASON') || '2026');
+ const WORLD_CUP_FEED = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2022/worldcup.json';
+ const apiBase = WORLD_CUP_FEED;
+ const apiToken = 'public-worldcup-feed';
+ const apiCompetition = 'WC';
+ const apiSeason = 2022;
 
  const normalizeStage = (value) => {
   const cleaned = value.replace(/\*+/g, '').replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
@@ -386,6 +412,7 @@
 
  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
  const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+ const worldCupMatchId = (fixture) => slugify(`${fixture?.round || 'match'}-${fixture?.date || ''}-${fixture?.team1 || ''}-${fixture?.team2 || ''}`);
  const teamCode = (value) => value.split(/\s+/).map((part) => part[0] || '').join('').slice(0, 3).toUpperCase();
  const teamRosterMap = {
   ARGENTINA: ['Emiliano Martinez', 'Nahuel Molina', 'Cristian Romero', 'Nicolas Otamendi', 'Nicolas Tagliafico', 'Rodrigo De Paul', 'Enzo Fernandez', 'Alexis Mac Allister', 'Angel Di Maria', 'Lionel Messi', 'Julian Alvarez'],
@@ -514,6 +541,7 @@
   homeScore,
   awayScore,
   hasLineupData,
+  lineupSource: null,
   homeTeam: { id: 'home', code: teamCode(rawHome), name: rawHome, manager: `${rawHome} Manager`, color: '#69f6b8', textColor: '#052014' },
   awayTeam: { id: 'away', code: teamCode(rawAway), name: rawAway, manager: `${rawAway} Manager`, color: '#77e6ff', textColor: '#00181d' },
   homeLineup: [],
@@ -570,6 +598,342 @@
   return events.sort((left, right) => left.minute - right.minute);
  };
 
+ const PLAYER_APPEARANCES_FEED = 'https://raw.githubusercontent.com/jfjelstul/worldcup/master/data-csv/player_appearances.csv';
+ let playerAppearancesPromise = null;
+
+ const parseCsv = (text) => {
+  const rows = [];
+  const lines = String(text || '').trim().split(/\r?\n/);
+  if (!lines.length) return rows;
+
+  const splitCsvLine = (line) => {
+   const values = [];
+   let current = '';
+   let insideQuotes = false;
+
+   for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (character === '"') {
+     if (insideQuotes && line[index + 1] === '"') {
+      current += '"';
+      index += 1;
+     } else {
+      insideQuotes = !insideQuotes;
+     }
+     continue;
+    }
+
+    if (character === ',' && !insideQuotes) {
+     values.push(current);
+     current = '';
+     continue;
+    }
+
+    current += character;
+   }
+
+   values.push(current);
+   return values;
+  };
+
+  const headers = splitCsvLine(lines[0]).map((value) => value.trim());
+  for (let index = 1; index < lines.length; index += 1) {
+   const line = lines[index].trim();
+   if (!line) continue;
+   const values = splitCsvLine(line);
+   const row = {};
+   headers.forEach((header, headerIndex) => {
+    row[header] = (values[headerIndex] ?? '').trim();
+   });
+   rows.push(row);
+  }
+
+  return rows;
+ };
+
+ const loadWorldCupAppearances = async () => {
+  if (!playerAppearancesPromise) {
+   playerAppearancesPromise = fetch(PLAYER_APPEARANCES_FEED)
+    .then((response) => {
+     if (!response.ok) throw new Error(`Player appearances feed failed: ${response.status}`);
+     return response.text();
+    })
+    .then(parseCsv)
+    .catch((error) => {
+     console.error('Unable to load World Cup appearances data.', error);
+     return [];
+    });
+  }
+
+  return playerAppearancesPromise;
+ };
+
+// Per-match formation overrides (keyed by normalized home-score-away string)
+const formationOverrides = {
+ "qatar-0-2-ecuador": { home: '5-3-2', away: '4-4-2' },
+ "senegal-0-2-netherlands": { home: '4-3-3', away: '3-4-1-2' },
+ "england-6-2-iran": { home: '4-3-3', away: '5-4-1' },
+ "usa-1-1-wales": { home: '4-3-3', away: '3-5-2' },
+ "argentina-1-2-saudi arabia": { home: '4-3-3', away: '4-1-4-1' },
+ "denmark-0-0-tunisia": { home: '3-4-3', away: '3-4-2-1' },
+ "mexico-0-0-poland": { home: '4-3-3', away: '3-5-2' },
+ "france-4-1-australia": { home: '4-2-3-1', away: '4-1-4-1' },
+ "morocco-0-0-croatia": { home: '4-3-3', away: '4-3-3' },
+ "germany-1-2-japan": { home: '4-2-3-1', away: '4-2-3-1' },
+ "spain-7-0-costa rica": { home: '4-3-3', away: '4-4-2' },
+ "belgium-1-0-canada": { home: '3-4-2-1', away: '3-4-3' },
+ "switzerland-1-0-cameroon": { home: '4-2-3-1', away: '4-3-3' },
+ "uruguay-0-0-south korea": { home: '4-3-3', away: '4-2-3-1' },
+ "portugal-3-2-ghana": { home: '4-3-3', away: '5-3-2' },
+ "brazil-2-0-serbia": { home: '4-2-3-1', away: '3-4-2-1' },
+ "wales-0-2-iran": { home: '3-5-2', away: '4-4-1-1' },
+ "qatar-1-3-senegal": { home: '5-3-2', away: '4-2-3-1' },
+ "netherlands-1-1-ecuador": { home: '3-4-1-2', away: '4-4-2' },
+ "england-0-0-usa": { home: '4-3-3', away: '4-3-3' },
+ "tunisia-1-0-australia": { home: '3-4-2-1', away: '4-1-4-1' },
+ "poland-2-0-saudi arabia": { home: '4-4-2', away: '4-1-4-1' },
+ "france-2-1-denmark": { home: '4-2-3-1', away: '3-4-3' },
+ "argentina-2-0-mexico": { home: '4-4-2', away: '4-3-3' },
+ "japan-0-1-costa rica": { home: '4-2-3-1', away: '5-4-1' },
+ "belgium-0-2-morocco": { home: '3-4-2-1', away: '4-3-3' },
+ "croatia-4-1-canada": { home: '4-3-3', away: '3-4-3' },
+ "spain-1-1-germany": { home: '4-3-3', away: '4-2-3-1' },
+ "cameroon-3-3-serbia": { home: '4-3-3', away: '3-4-2-1' },
+ "south korea-2-3-ghana": { home: '4-2-3-1', away: '5-3-2' },
+ "brazil-1-0-switzerland": { home: '4-2-3-1', away: '4-2-3-1' },
+ "portugal-2-0-uruguay": { home: '4-3-3', away: '4-3-3' },
+ "ecuador-1-2-senegal": { home: '4-1-2-3', away: '4-2-3-1' },
+ "netherlands-2-0-qatar": { home: '3-4-1-2', away: '5-3-2' },
+ "wales-0-3-england": { home: '4-2-3-1', away: '4-3-3' },
+ "iran-0-1-usa": { home: '4-4-1-1', away: '4-3-3' },
+ "tunisia-1-0-france": { home: '4-3-3', away: '4-2-3-1' },
+ "australia-1-0-denmark": { home: '4-4-2', away: '3-4-3' },
+ "poland-0-2-argentina": { home: '4-4-2', away: '4-3-3' },
+ "saudi arabia-1-2-mexico": { home: '4-1-4-1', away: '4-3-3' },
+ "croatia-0-0-belgium": { home: '4-3-3', away: '3-4-2-1' },
+ "canada-1-2-morocco": { home: '3-4-3', away: '4-3-3' },
+ "japan-2-1-spain": { home: '3-4-2-1', away: '4-3-3' },
+ "costa rica-2-4-germany": { home: '5-4-1', away: '4-2-3-1' },
+ "cameroon-1-0-brazil": { home: '4-3-3', away: '4-2-3-1' },
+ "serbia-2-3-switzerland": { home: '3-4-2-1', away: '4-2-3-1' },
+ "south korea-2-1-portugal": { home: '4-2-3-1', away: '4-3-3' },
+ "ghana-0-2-uruguay": { home: '4-2-3-1', away: '4-3-3' },
+ "netherlands-3-1-usa": { home: '3-4-1-2', away: '4-3-3' },
+ "argentina-2-1-australia": { home: '4-3-3', away: '4-4-2' },
+ "france-3-1-poland": { home: '4-2-3-1', away: '4-4-2' },
+ "england-3-0-senegal": { home: '4-3-3', away: '4-2-3-1' },
+ "japan-1-1-croatia": { home: '3-4-2-1', away: '4-3-3' },
+ "brazil-4-1-south korea": { home: '4-2-3-1', away: '4-2-3-1' },
+ "morocco-0-0-spain": { home: '4-3-3', away: '4-3-3' },
+ "portugal-6-1-switzerland": { home: '4-3-3', away: '4-2-3-1' },
+ "croatia-1-1-brazil": { home: '4-3-3', away: '4-2-3-1' },
+ "netherlands-2-2-argentina": { home: '3-4-1-2', away: '4-3-3' },
+ "morocco-1-0-portugal": { home: '4-3-3', away: '4-3-3' },
+ "england-1-2-france": { home: '4-3-3', away: '4-2-3-1' },
+ "argentina-3-0-croatia": { home: '4-4-2', away: '4-3-3' },
+ "france-2-0-morocco": { home: '4-2-3-1', away: '4-3-3' },
+ "croatia-2-1-morocco": { home: '4-3-3', away: '4-3-3' },
+ "argentina-3-3-france": { home: '4-3-3', away: '4-2-3-1' }
+};
+
+const formationKeyForMatch = (m) => `${normalizeLookupKey(m.homeTeam.name)}-${parseNumber(m.homeScore, 0)}-${parseNumber(m.awayScore, 0)}-${normalizeLookupKey(m.awayTeam.name)}`;
+
+const generateTemplateFromFormation = (formation, side) => {
+ const parts = String(formation || '').split('-').map((p) => parseInt(p, 10) || 0).filter((n) => n > 0);
+ const isHome = side === 'home';
+ const xFor = (band, rowIndex = 0, totalRows = 1) => {
+  // map defensive/mid/att rows to approximate x positions depending on side and row
+  const homeMap = { def: 20, mid: 45, att: 68 };
+  const awayMap = { def: 80, mid: 57, att: 32 };
+  return isHome ? homeMap[band] : awayMap[band];
+ };
+
+ const distributeYs = (count) => {
+  const spanStart = 18;
+  const spanEnd = 82;
+  if (count <= 1) return [50];
+  const step = (spanEnd - spanStart) / (count - 1);
+  return Array.from({ length: count }).map((_, i) => Math.round(spanStart + i * step));
+ };
+
+ const slots = [{ position: 'GK', x: isHome ? 8 : 92, y: 50 }];
+
+ // Determine rows: support 3-part and 4-part formations
+ const defCount = parts[0] || 4;
+ const hasFourParts = parts.length >= 4;
+ const midDeepCount = hasFourParts ? (parts[1] || 0) : (parts[1] || 0);
+ const midAdvanceCount = hasFourParts ? (parts[2] || 0) : 0;
+ const attCount = hasFourParts ? (parts[3] || (parts[2] || 1)) : (parts[2] || 1);
+
+ const addRow = (count, band, positionChooser) => {
+  const ys = distributeYs(count);
+  for (let i = 0; i < count; i += 1) {
+   const pos = positionChooser ? positionChooser(i, count) : 'CM';
+   slots.push({ position: pos, x: xFor(band), y: ys[i] });
+  }
+ };
+
+ // defenders
+ addRow(defCount, 'def', (i, count) => (count === 3 ? (i === 0 ? 'LCB' : i === 1 ? 'CB' : 'RCB') : (i === 0 ? 'LB' : i === count - 1 ? 'RB' : 'CB')));
+
+ // mid-deep row (if present)
+ if (midDeepCount > 0) {
+  addRow(midDeepCount, 'mid', (i, count) => (count === 1 ? 'CM' : i === 0 ? 'DM' : i === count - 1 ? 'DM' : 'CM'));
+ }
+
+ // mid-advanced row (for 4-part formations)
+ if (midAdvanceCount > 0) {
+  addRow(midAdvanceCount, 'mid', (i, count) => (count === 1 ? 'AM' : i === 0 ? 'LM' : i === count - 1 ? 'RM' : 'CM'));
+ }
+
+ // attackers row
+ if (attCount > 0) {
+  addRow(attCount, 'att', (i, count) => {
+   if (count === 1) return 'ST';
+   if (count === 2) return i === 0 ? 'ST' : 'ST';
+   if (count === 3) return i === 0 ? 'LW' : i === 1 ? 'ST' : 'RW';
+   return 'ST';
+  });
+ }
+
+ // ensure exactly 11 players (GK + 10 outfield)
+ if (slots.length > 11) slots.splice(11);
+ while (slots.length < 11) slots.push({ position: 'CM', x: xFor('mid'), y: 50 });
+ return slots;
+};
+
+const applyFormationOverride = (m) => {
+ const key = formationKeyForMatch(m);
+ const override = formationOverrides[key];
+ if (!override) return false;
+ m.homeFormation = override.home;
+ m.awayFormation = override.away;
+ lineupTemplates.home = generateTemplateFromFormation(override.home || '4-3-3', 'home');
+ lineupTemplates.away = generateTemplateFromFormation(override.away || '4-3-3', 'away');
+ return true;
+};
+
+ const normalizeLookupKey = (value) => slugify(String(value || '').toLowerCase());
+
+ const appearanceRole = (row) => {
+  const code = String(row?.position_code || '').toUpperCase();
+  const name = String(row?.position_name || '').toLowerCase();
+
+  if (code === 'GK' || name.includes('goal keeper') || name.includes('goalkeeper')) return 'GK';
+  if (['LB', 'LWB', 'CB', 'RB', 'RWB', 'DF', 'SW'].includes(code) || name.includes('back') || name.includes('defender') || name.includes('sweeper')) return 'DEF';
+  if (['DM', 'CM', 'AM', 'LM', 'RM', 'MF'].includes(code) || name.includes('midfielder') || name.includes('winger') || name.includes('half')) return 'MID';
+  return 'FWD';
+ };
+
+ const appearanceDisplayName = (row) => {
+  const pieces = [row?.given_name, row?.family_name].filter((piece) => {
+   if (!piece) return false;
+   const normalized = String(piece).trim().toLowerCase();
+   return normalized !== 'not applicable' && normalized !== 'unknown';
+  });
+  return pieces.length ? pieces.join(' ') : 'Unknown Player';
+ };
+
+ const buildAppearanceStats = (row, slot, index, side, goalsFor, goalsAgainst) => {
+  const playerSeed = seedFromString(`${row?.player_id || row?.family_name || row?.given_name || slot.position}-${side}-${index}-${matchSeed}`);
+  const playerRnd = randomFactory(playerSeed);
+  const base = slot.position === 'GK' ? 6.6 : slot.position === 'ST' ? 7.2 : slot.position === 'AM' ? 7.0 : 6.7;
+  const bias = goalsFor > goalsAgainst ? 0.4 : goalsFor === goalsAgainst ? 0.15 : -0.2;
+
+  return {
+   goals: 0,
+   assists: clamp(Math.round(playerRnd() * 2 + (slot.position === 'AM' || slot.position === 'LW' || slot.position === 'RW' ? 1 : 0) + bias), 0, 3),
+   passes: Math.round(clamp((slot.position === 'GK' ? 18 : slot.position === 'ST' ? 20 : 32) + playerRnd() * 38 + index * 2, 8, 96)),
+   shots: Math.round(clamp((slot.position === 'ST' || slot.position === 'AM' ? 1 : 0) + playerRnd() * 3, 0, 7)),
+   minutes: 90,
+   fouls: clamp(Math.round(playerRnd() * 3), 0, 4),
+   cards: clamp(Math.round(playerRnd() * 2), 0, 2),
+   rating: Number(clamp(base + playerRnd() * 1.4 + bias, 5.5, 9.9).toFixed(1))
+  };
+ };
+
+ const buildAppearanceLineup = (teamName, side, goalsFor, goalsAgainst, starterRows) => {
+  const starters = starterRows
+   .filter((row) => String(row?.starter) === '1')
+   .slice()
+   .sort((left, right) => {
+    const shirtDiff = parseNumber(left?.shirt_number, 0) - parseNumber(right?.shirt_number, 0);
+    if (shirtDiff !== 0) return shirtDiff;
+    return appearanceDisplayName(left).localeCompare(appearanceDisplayName(right));
+   });
+
+  const pools = {
+   GK: starters.filter((row) => appearanceRole(row) === 'GK'),
+   DEF: starters.filter((row) => appearanceRole(row) === 'DEF'),
+   MID: starters.filter((row) => appearanceRole(row) === 'MID'),
+   FWD: starters.filter((row) => appearanceRole(row) === 'FWD')
+  };
+  const fallbackOrder = ['GK', 'DEF', 'MID', 'FWD'];
+
+  const takePlayer = (preferredPool) => {
+   const orderedPools = [preferredPool, ...fallbackOrder.filter((poolName) => poolName !== preferredPool)];
+   for (const poolName of orderedPools) {
+    if (pools[poolName]?.length) return pools[poolName].shift();
+   }
+   return starters.shift() || null;
+  };
+
+  return lineupTemplates[side].map((slot, index) => {
+   const preferredPool = slot.position === 'GK' ? 'GK' : (slot.position === 'ST' || slot.position === 'LW' || slot.position === 'RW') ? 'FWD' : (slot.position === 'DM' || slot.position === 'CM' || slot.position === 'AM') ? 'MID' : 'DEF';
+   const row = takePlayer(preferredPool);
+   const playerName = row ? appearanceDisplayName(row) : rosterNameForSlot(teamName, slot, index);
+   const playerNumber = parseNumber(row?.shirt_number, index + 1);
+   const positionCode = String(row?.position_code || slot.position).toUpperCase();
+   return {
+    side,
+    player: {
+     id: row?.player_id || `${slugify(teamName)}-${slot.position.toLowerCase()}-${index}`,
+     name: playerName,
+     number: playerNumber,
+     position: positionCode,
+     x: slot.x,
+     y: slot.y,
+     stats: buildAppearanceStats(row, slot, index, side, goalsFor, goalsAgainst)
+    }
+   };
+  });
+ };
+
+ const hydrateWorldCupLineups = (fixtureRows) => {
+  const fixtureKey = normalizeLookupKey(`${match.homeTeam.name} vs ${match.awayTeam.name}`);
+  const fixtureDate = String(match.date || '').slice(0, 10);
+  const matchingRows = fixtureRows.filter((row) => {
+   if (String(row?.tournament_id) !== 'WC-2022') return false;
+   if (normalizeLookupKey(row?.match_name) !== fixtureKey) return false;
+   return String(row?.match_date || '').slice(0, 10) === fixtureDate;
+  });
+
+  if (!matchingRows.length) {
+   match.hasLineupData = false;
+   match.lineupSource = null;
+   match.homeLineup = [];
+   match.awayLineup = [];
+   return false;
+  }
+
+  const homeRows = matchingRows.filter((row) => normalizeLookupKey(row?.team_name) === normalizeLookupKey(match.homeTeam.name));
+  const awayRows = matchingRows.filter((row) => normalizeLookupKey(row?.team_name) === normalizeLookupKey(match.awayTeam.name));
+
+  if (!homeRows.length || !awayRows.length) {
+   match.hasLineupData = false;
+   match.lineupSource = null;
+   match.homeLineup = [];
+   match.awayLineup = [];
+   return false;
+  }
+
+  match.homeLineup = buildAppearanceLineup(match.homeTeam.name, 'home', match.homeScore, match.awayScore, homeRows);
+  match.awayLineup = buildAppearanceLineup(match.awayTeam.name, 'away', match.awayScore, match.homeScore, awayRows);
+  match.hasLineupData = true;
+  match.lineupSource = 'appearance-feed';
+  return true;
+ };
+
  const normalizeLineupEntries = (rawLineup) => {
   if (Array.isArray(rawLineup)) return rawLineup;
   if (Array.isArray(rawLineup?.startXI)) return rawLineup.startXI;
@@ -623,15 +987,6 @@
  };
 
  const rebuildDerivedData = () => {
-  if (match.hasLineupData && (!match.homeLineup.length || !match.awayLineup.length)) {
-   match.homeLineup = buildLineup(match.homeTeam.name, 'home', match.homeScore, match.awayScore);
-   match.awayLineup = buildLineup(match.awayTeam.name, 'away', match.awayScore, match.homeScore);
-  }
-  if (!match.hasLineupData) {
-   match.homeLineup = [];
-   match.awayLineup = [];
-  }
-
   match.stats = {
    possession: [clamp(Math.round(52 + (match.homeScore - match.awayScore) * 4 + (matchSeed % 7) - 3), 38, 64), 0],
    totalGoals: match.homeScore + match.awayScore,
@@ -675,15 +1030,32 @@
   }
  };
 
- const fetchApiFixture = async (matchId) => {
-  if (!apiToken) return null;
-  if (!/^\d+$/.test(String(matchId))) return null;
-  const endpoint = `${apiBase}/matches/${matchId}`;
-  const response = await fetch(endpoint, { headers: { 'X-Auth-Token': apiToken } });
-  if (!response.ok) throw new Error(`API request failed: ${response.status}`);
-  const payload = await response.json();
-  return payload?.match || payload;
- };
+   const applyWorldCupFixture = (fixture) => {
+    if (!fixture) return;
+
+    match.id = worldCupMatchId(fixture);
+    match.stage = normalizeStage(String(fixture?.round || fixture?.group || match.stage));
+    match.date = formatDateForUi(`${fixture?.date || ''}T${fixture?.time || '00:00'}:00Z`);
+    match.venue = fixture?.ground || match.venue;
+    match.status = 'FINISHED';
+    match.homeScore = parseNumber(fixture?.score?.ft?.[0], match.homeScore);
+    match.awayScore = parseNumber(fixture?.score?.ft?.[1], match.awayScore);
+    match.homeTeam = { ...match.homeTeam, name: fixture?.team1 || match.homeTeam.name, code: teamCode(fixture?.team1 || match.homeTeam.name), manager: `${fixture?.team1 || match.homeTeam.name} Manager` };
+    match.awayTeam = { ...match.awayTeam, name: fixture?.team2 || match.awayTeam.name, code: teamCode(fixture?.team2 || match.awayTeam.name), manager: `${fixture?.team2 || match.awayTeam.name} Manager` };
+    match.hasLineupData = false;
+    match.lineupSource = null;
+    match.homeLineup = [];
+    match.awayLineup = [];
+   };
+
+   const fetchWorldCupFixture = async (matchId) => {
+    const response = await fetch(WORLD_CUP_FEED);
+    if (!response.ok) throw new Error(`World Cup feed failed: ${response.status}`);
+    const payload = await response.json();
+    const matches = Array.isArray(payload?.matches) ? payload.matches : [];
+    const normalizedId = slugify(String(matchId || ''));
+    return matches.find((fixture) => worldCupMatchId(fixture) === normalizedId) || null;
+   };
 
  const allPlayers = () => match.homeLineup.concat(match.awayLineup);
  const playerShell = document.getElementById('selected-player-shell');
@@ -846,13 +1218,34 @@
  };
 
  const init = async () => {
-  if (apiToken && rawMatchId) {
+  let appearances = [];
+
+  if (rawMatchId) {
    try {
-    const fixture = await fetchApiFixture(rawMatchId);
-    if (fixture) applyApiFixture(fixture);
+    const fixture = await fetchWorldCupFixture(rawMatchId);
+    if (fixture) applyWorldCupFixture(fixture);
    } catch (error) {
-    console.error('Unable to fetch WC26 API match details. Falling back to URL data.', error);
+    console.error('Unable to fetch World Cup match details. Falling back to URL data.', error);
    }
+  }
+
+  try {
+   appearances = await loadWorldCupAppearances();
+  } catch (error) {
+   console.error('Unable to load player appearances feed.', error);
+  }
+
+  if (appearances.length) {
+   hydrateWorldCupLineups(appearances);
+    applyFormationOverride(match);
+  }
+
+  if (!match.hasLineupData) {
+    applyFormationOverride(match);
+   match.homeLineup = buildLineup(match.homeTeam.name, 'home', match.homeScore, match.awayScore);
+   match.awayLineup = buildLineup(match.awayTeam.name, 'away', match.awayScore, match.homeScore);
+   match.hasLineupData = true;
+   match.lineupSource = 'synthetic';
   }
 
   rebuildDerivedData();
@@ -866,10 +1259,6 @@
   window.__selectedPlayerId = null;
   renderPitch();
  };
-
- if (!apiToken) {
-  console.info(`WC26 API token missing. Set localStorage.WC26_API_TOKEN to use ${apiBase}/competitions/${apiCompetition}/matches?season=${apiSeason}.`);
- }
 
  init();
 

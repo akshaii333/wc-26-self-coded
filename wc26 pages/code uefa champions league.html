@@ -119,37 +119,58 @@
             padding-top: 0.7rem;
             padding-bottom: 0.7rem;
         }
+        .uccl-nav-icon {
+            width: 2.25rem;
+            height: 2.25rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #9a9a9a;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: color 180ms ease, background-color 180ms ease, box-shadow 220ms ease, transform 180ms ease, filter 220ms ease, border-color 180ms ease;
+        }
+        .uccl-nav-icon:hover {
+            color: #d0d0d0;
+            transform: scale(1.04);
+        }
+        .uccl-nav-icon:active {
+            transform: scale(1.01);
+        }
+        .uccl-nav-icon-active {
+            color: #ecfff8;
+            background: rgba(89, 255, 198, 0.1);
+            border-color: rgba(89, 255, 198, 0.45);
+            box-shadow: 0 0 0 1px rgba(89, 255, 198, 0.12) inset, 0 0 12px rgba(89, 255, 198, 0.3), 0 0 22px rgba(89, 255, 198, 0.16);
+            filter: drop-shadow(0 0 8px rgba(89, 255, 198, 0.34));
+        }
+        .uccl-nav-icon-active:hover {
+            color: #ffffff;
+            background: rgba(89, 255, 198, 0.14);
+            transform: scale(1.08);
+        }
+        .uccl-nav-icon-active:active {
+            transform: scale(1.04);
+        }
     </style>
 </head>
 <body class="font-body text-on-surface">
-    <!-- TopNavBar -->
-    <nav class="w-full px-6 py-4 bg-[#0e0e0e] border-b-0 flex justify-between items-center sticky top-0 z-50">
-        <div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">
-            TACTICAL_INTEL
+    <!-- TopNavBar Shell -->
+    <header class="bg-[#0e0e0e] border-b border-[#494847]/30 flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50">
+        <div class="text-xl font-black text-[#69f6b8] tracking-widest font-headline">TACTICAL_INTEL</div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
+            <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a>
+            
+            <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
+            <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+            <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20about.html">ABOUT</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            
+            <button id="uccl-panel-toggle" class="material-symbols-outlined uccl-nav-icon wc26-nav-icon wc26-nav-icon-active cursor-pointer" title="Customize" aria-label="Customize">tune</button>
         </div>
-        <div class="hidden md:flex items-center space-x-8 font-space-grotesk tracking-tighter uppercase text-sm font-bold">
-            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
-            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20system archive.html">MATCHES</a>
-            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
-            <a class="text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
-            <a class="text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
-        </div>
-        <div class="flex items-center space-x-4">
-            <div class="relative hidden sm:block">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
-                <input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
-            </div>
-            <div id="uccl-focus-chip" class="hidden md:flex items-center gap-2 px-3 py-1 border border-outline-variant/30 text-[10px] font-mono uppercase tracking-widest text-primary bg-surface-container">
-                UEFA_CL // SEASON_2025
-            </div>
-            <button id="uccl-zoom-button" class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1 transition-colors" title="Zoom level">zoom_in</button>
-            <button id="uccl-panel-toggle" class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1 hover:text-[#69f6b8] transition-colors" title="Data layers">view_list</button>
-            <button id="uccl-save-button" class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1 hover:text-[#69f6b8] transition-colors" title="Save view">bookmark</button>
-            <span class="material-symbols-outlined text-[#69f6b8] cursor-pointer hover:bg-[#201f1f] p-1">analytics</span>
-            <span class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1">terminal</span>
-            <span class="material-symbols-outlined text-[#adaaaa] cursor-pointer hover:bg-[#201f1f] p-1">settings</span>
-        </div>
-    </nav>
+    </header>
 
     <div id="uccl-layer-panel" class="hidden fixed top-20 right-6 bg-surface-container border border-outline-variant/30 rounded-none p-4 z-50 w-56 shadow-lg">
         <h3 class="font-headline font-bold text-xs tracking-widest uppercase text-primary mb-4 flex items-center gap-2">

@@ -94,32 +94,61 @@
             background-repeat: no-repeat, repeat, repeat, no-repeat;
             background-attachment: fixed, fixed, fixed, fixed;
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+                .material-symbols-outlined {
+                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+                }
+                .wc26-nav-icon {
+                    width: 2.25rem;
+                    height: 2.25rem;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #9a9a9a;
+                    background: transparent;
+                    border: 1px solid transparent;
+                    transition: color 180ms ease, background-color 180ms ease, box-shadow 220ms ease, transform 180ms ease, filter 220ms ease, border-color 180ms ease;
+                }
+                .wc26-nav-icon:hover {
+                    color: #d0d0d0;
+                    transform: scale(1.04);
+                }
+                .wc26-nav-icon:active {
+                    transform: scale(1.01);
+                }
+                .wc26-nav-icon-active {
+                    color: #ecfff8;
+                    background: rgba(89, 255, 198, 0.1);
+                    border-color: rgba(89, 255, 198, 0.45);
+                    box-shadow: 0 0 0 1px rgba(89, 255, 198, 0.12) inset, 0 0 12px rgba(89, 255, 198, 0.3), 0 0 22px rgba(89, 255, 198, 0.16);
+                    filter: drop-shadow(0 0 8px rgba(89, 255, 198, 0.34));
+                }
+                .wc26-nav-icon-active:hover {
+                    color: #ffffff;
+                    background: rgba(89, 255, 198, 0.14);
+                    transform: scale(1.08);
+                }
+                .wc26-nav-icon-active:active {
+                    transform: scale(1.04);
+                }
+        </style>
 </head>
 <body class="font-body text-on-surface">
 <!-- TopNavBar Shell -->
 <header class="bg-[#0e0e0e] border-b border-[#494847]/30 flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50">
-<div class="text-xl font-black text-[#69f6b8] tracking-widest">TACTICAL_INTEL_V1</div>
+<div class="text-xl font-black text-[#69f6b8] tracking-widest">TACTICAL_INTEL</div>
 <nav class="hidden md:flex items-center gap-8">
     <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20homepage.html">HOME</a>
 <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#69f6b8] border-b-2 border-[#69f6b8] pb-1" href="code%20system archive.html">MATCHES</a>
-<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20match%20detail.html">MATCH DETAIL</a>
-<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20tactical ledger.html">TACTICAL LEDGER</a>
-<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
-<a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+
+    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20performance index.html">PERFORMANCE INDEX</a>
+    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20uefa%20champions%20league.html">UEFA_CL</a>
+    <a class="font-space-grotesk tracking-tighter uppercase text-sm font-bold text-[#adaaaa] hover:text-[#ffffff] transition-colors" href="code%20about.html">ABOUT</a>
 </nav>
 <div class="flex items-center gap-4">
-<div class="relative hidden lg:block">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined text-sm">search</span>
-<input class="bg-white text-black placeholder:text-gray-500 text-xs font-label uppercase tracking-widest pl-10 pr-4 py-2 w-48 focus:ring-1 focus:ring-primary" placeholder="QUERY_ID" type="text"/>
-</div>
+ 
 <div class="flex gap-3">
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">analytics</button>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">terminal</button>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">settings</button>
+    
+    <button class="material-symbols-outlined wc26-nav-icon wc26-nav-icon-active cursor-pointer" title="Customize" aria-label="Customize">tune</button>
 </div>
 </div>
 </header>
@@ -321,10 +350,9 @@
 (() => {
     const detailUrl = 'code%20match%20detail.html';
     const params = new URLSearchParams(window.location.search);
-    const apiBase = params.get('apiBase') || localStorage.getItem('WC26_API_BASE') || 'https://api.football-data.org/v4';
-    const apiToken = params.get('apiToken') || localStorage.getItem('WC26_API_TOKEN') || '';
+    const WORLD_CUP_FEED = 'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2022/worldcup.json';
     const competitionCode = params.get('competition') || localStorage.getItem('WC26_COMPETITION') || 'WC';
-    const season = Number(params.get('season') || localStorage.getItem('WC26_SEASON') || '2026');
+    const season = Number(params.get('season') || localStorage.getItem('WC26_SEASON') || '2022');
     const settingsButton = document.getElementById('api-settings-button');
 
     const rows = Array.from(document.querySelectorAll('tbody tr'));
@@ -422,13 +450,29 @@
         row.dataset.score = cells[3].textContent.trim();
     };
 
+    const normalizeMatch = (fixture) => {
+        const fullTime = fixture?.score?.ft || [];
+        const home = fullTime[0] ?? 0;
+        const away = fullTime[1] ?? 0;
+        const date = `${fixture?.date || ''} ${fixture?.time || ''}`.trim();
+        return {
+            id: slugify(`${fixture?.round || 'match'}-${fixture?.date || ''}-${fixture?.team1 || ''}-${fixture?.team2 || ''}`),
+            utcDate: `${fixture?.date || '1970-01-01'}T${fixture?.time || '00:00'}:00Z`,
+            group: fixture?.group || '',
+            stage: fixture?.round || 'MATCH',
+            homeTeam: { name: fixture?.team1 || 'HOME', shortName: fixture?.team1 || 'HOME' },
+            awayTeam: { name: fixture?.team2 || 'AWAY', shortName: fixture?.team2 || 'AWAY' },
+            score: { fullTime: { home, away } },
+            ground: fixture?.ground || '',
+            rawDateTime: date,
+        };
+    };
+
     const fetchMatches = async () => {
-        if (!apiToken) return [];
-        const endpoint = `${apiBase}/competitions/${competitionCode}/matches?season=${season}`;
-        const response = await fetch(endpoint, { headers: { 'X-Auth-Token': apiToken } });
-        if (!response.ok) throw new Error(`API request failed: ${response.status}`);
+        const response = await fetch(WORLD_CUP_FEED);
+        if (!response.ok) throw new Error(`World Cup feed failed: ${response.status}`);
         const payload = await response.json();
-        return Array.isArray(payload?.matches) ? payload.matches : [];
+        return Array.isArray(payload?.matches) ? payload.matches.map(normalizeMatch) : [];
     };
 
     const attachDetailsNavigation = () => {
@@ -483,16 +527,10 @@
 
     const init = async () => {
         rows.forEach(seedRowFromMarkup);
-        if (!apiToken) {
-            console.info('WC26 API token missing. Set localStorage.WC26_API_TOKEN to enable live match data.');
-            attachDetailsNavigation();
-            return;
-        }
-
         try {
             const matches = await fetchMatches();
             if (!matches.length) {
-                console.warn('WC26 API returned no matches for configured season.');
+                console.warn('World Cup feed returned no matches for configured season.');
             }
             rows.forEach((row, index) => {
                 const fixture = matches[index];
